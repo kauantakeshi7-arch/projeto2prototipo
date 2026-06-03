@@ -96,7 +96,9 @@ export class BenchmarkEngine {
 
     // 2. Se for PC com Placa de Vídeo Dedicada
     if (gpu) {
-      if (gpu.id.includes('rtx4070')) {
+      if (gpu.id.includes('4090') || gpu.id.includes('9070')) {
+        return this.benchmarks['rtx4090'];
+      } else if (gpu.id.includes('rtx4070') || gpu.id.includes('7800') || gpu.id.includes('7900')) {
         return this.benchmarks['rtx4070ti'];
       } else if (gpu.id.includes('rtx4060') || gpu.id.includes('rx6600') || gpu.id.includes('5060')) {
         return this.benchmarks['rtx4060'];

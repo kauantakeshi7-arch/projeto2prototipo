@@ -70,9 +70,9 @@ export class HardwareEngine {
                                 if (totalPrice <= intent.budget) {
                                     let score = 0;
                                     if (gpu) {
-                                        score = gpu.price * 1.5 + cpu.price * 1.0;
+                                        score = (gpu.price * 1.5) + (cpu.price * 1.0) + (ram.price * 0.5) + (ssd.price * 0.4) + (mb.price * 0.3) + (psu.price * 0.3) + (c.price * 0.1);
                                     } else {
-                                        score = cpu.price * 1.2;
+                                        score = (cpu.price * 1.2) + (ram.price * 0.6) + (ssd.price * 0.4) + (mb.price * 0.3) + (psu.price * 0.3) + (c.price * 0.1);
                                     }
 
                                     if (intent.budget > 4000 && ram.price < 200) score -= 1000;
