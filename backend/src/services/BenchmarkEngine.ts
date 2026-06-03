@@ -79,12 +79,12 @@ export class BenchmarkEngine {
    */
   public static calculate(parts: FoundPart[]): GameFPS[] {
     // 1. Achar a Placa de Vídeo Dedicada
-    let gpu = parts.find(p => p.component.toLowerCase().includes('vídeo') || p.component.toLowerCase().includes('video'));
+    let gpu = parts.find(p => p.component === 'GPU');
     
     // 2. Se não tem GPU dedicada, achar o Processador (Pode ter gráfico integrado)
     let cpu = null;
     if (!gpu) {
-      cpu = parts.find(p => p.component.toLowerCase().includes('processador'));
+      cpu = parts.find(p => p.component === 'CPU');
     }
 
     const titleToParse = (gpu ? gpu.name : cpu?.name) || '';
@@ -94,11 +94,20 @@ export class BenchmarkEngine {
     // Ex: "VGA ASUS NVIDIA GEFORCE RTX 4060 TI" -> "vgaasusnvidiageforcertx4060ti"
     const normalized = titleToParse.toLowerCase().replace(/[^a-z0-9]/g, '');
 
-    // Busca pela sub-string correspondente no dicionário
-    for (const key of Object.keys(this.benchmarks)) {
-      if (normalized.includes(key)) {
-        return this.benchmarks[key];
+    // 2. Se for PC com Placa de Vídeo Dedicada
+    if (gpu) {
+      if (gpu.id.includes('rtx4070')) {
+        return this.benchmarks['rtx4070ti'];
+      } else if (gpu.id.includes('rtx4060') || gpu.id.includes('rx6600') || gpu.id.includes('5060')) {
+        return this.benchmarks['rtx4060'];
       }
+      return this.benchmarks['rtx3060']; // fallback decente genérico
+    }
+
+    // 3. Se for APU (Sem placa de vídeo)
+    if (cpu) {
+      if (cpu.id.includes('8600g')) return this.benchmarks['8600g'];
+      if (cpu.id.includes('5600g') || cpu.id.includes('5600gt')) return this.benchmarks['5600gt'];
     }
 
     // Fallback: Se achou uma Placa de Vídeo mas o modelo não está no nosso dicionário, chute conservador
