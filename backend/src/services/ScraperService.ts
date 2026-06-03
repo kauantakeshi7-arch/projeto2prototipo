@@ -29,9 +29,17 @@ export class ScraperService {
       try {
         const queries = part.searchQueries || (part.searchQuery ? [part.searchQuery] : []);
         let finalFoundPart: FoundPart | null = null;
+        
+        let bestItemStrict: any = null;
+        let bestItemStrictUrl = '';
+
+        let bestItemExtended: any = null;
+        let bestItemExtendedUrl = '';
+
         let lastResortItem: any = null;
         let lastResortUrl = '';
 
+        // FASE 1: Baixar os dados de todas as queries e tentar achar no Preço Estrito
         for (let i = 0; i < queries.length; i++) {
           const query = queries[i];
           const queryEncoded = encodeURIComponent(query);
@@ -40,107 +48,91 @@ export class ScraperService {
           // Verifica o Cache
           const cached = this.cache.get(kabumUrl);
           if (cached && (Date.now() - cached.timestamp < this.CACHE_TTL)) {
-            console.log(`[Cache Hit] ${part.componentName} -> ${cached.part.name}`);
-            cached.part.reason = part.reason;
-            finalFoundPart = cached.part;
-            break; // Sai do loop de queries
+             finalFoundPart = cached.part;
+             finalFoundPart.reason = part.reason;
+             break; // Achou no cache, confia
           }
 
           console.log(`[Scraping] Buscando: ${query} ...`);
-          
           const kabumRes = await axios.get(kabumUrl, {
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-              'Accept': 'application/json'
-            },
+            headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' },
             timeout: 8000,
             httpsAgent: new https.Agent({ keepAlive: true })
           });
 
           const items = kabumRes.data?.data || [];
-          let bestItem = null;
 
-          // Tentativa Normal
+          // Avalia para Strict e Extended
           for (const item of items) {
             const price = item.attributes.price_with_discount || item.attributes.price;
-            if (price >= part.minPrice && price <= part.maxPrice) {
-              bestItem = item;
-              break;
+            
+            // Grava o Strict
+            if (!bestItemStrict && price >= part.minPrice && price <= part.maxPrice) {
+              bestItemStrict = item;
+              bestItemStrictUrl = kabumUrl;
+            }
+
+            // Grava o Extended (+30%)
+            if (!bestItemExtended && price >= part.minPrice && price <= (part.maxPrice * 1.3)) {
+              bestItemExtended = item;
+              bestItemExtendedUrl = kabumUrl;
+            }
+
+            // Grava o Ultimate (Qualquer coisa acima do minPrice)
+            if (!lastResortItem && price >= part.minPrice) {
+              lastResortItem = item;
+              lastResortUrl = kabumUrl;
             }
           }
 
-          // Tolerância Dinâmica (+30%)
-          if (!bestItem && items.length > 0) {
-            const extendedMax = part.maxPrice * 1.3;
-            for (const item of items) {
-              const price = item.attributes.price_with_discount || item.attributes.price;
-              if (price >= part.minPrice && price <= extendedMax) {
-                bestItem = item;
-                console.log(`[Tolerância Ativada] Peça ${query} selecionada com margem de +30%.`);
-                break;
-              }
-            }
+          // Se já achou no Strict, nem precisa continuar batendo na API pras outras queries
+          if (bestItemStrict) {
+            break;
           }
 
-          // Salva o mais barato válido no Ultimate Fallback
-          if (!bestItem && items.length > 0 && !lastResortItem) {
-            for (const item of items) {
-              const price = item.attributes.price_with_discount || item.attributes.price;
-              if (price >= part.minPrice) {
-                lastResortItem = item;
-                lastResortUrl = kabumUrl;
-                break;
-              }
-            }
-          }
-
-          if (bestItem) {
-            const price = bestItem.attributes.price_with_discount || bestItem.attributes.price;
-            const productLink = `https://www.kabum.com.br/produto/${bestItem.id}/${bestItem.attributes.product_link}`;
-            const photos = bestItem.attributes.photos;
-            const photoUrl = photos && photos.g && photos.g.length > 0 
-                             ? photos.g[0] 
-                             : (photos && photos.m && photos.m.length > 0 ? photos.m[0] : `https://images.kabum.com.br/produtos/fotos/${bestItem.id}/${bestItem.id}_index_g.jpg`);
-
-            finalFoundPart = {
-              component: part.componentName,
-              name: bestItem.attributes.title,
-              price: price,
-              link: productLink,
-              photo: photoUrl,
-              reason: part.reason
-            };
-
-            this.cache.set(kabumUrl, { part: finalFoundPart, timestamp: Date.now() });
-            break; // Achou! Sai do loop de queries.
-          }
-
-          // Respiro Anti-DDoS entre queries
-          if (i < queries.length - 1) {
-            await new Promise(r => setTimeout(r, 400));
-          }
+          if (i < queries.length - 1) await new Promise(r => setTimeout(r, 400));
         }
 
-        // Se não achou NADA dentro do orçamento, ativa o Ultimate Survival Fallback
-        if (!finalFoundPart && lastResortItem) {
-          console.log(`[Ultimate Fallback] Orçamento estourado para ${part.componentName}. Comprando o mais barato possível acima do minPrice.`);
-          const price = lastResortItem.attributes.price_with_discount || lastResortItem.attributes.price;
-          const productLink = `https://www.kabum.com.br/produto/${lastResortItem.id}/${lastResortItem.attributes.product_link}`;
-          const photos = lastResortItem.attributes.photos;
-          const photoUrl = photos && photos.g && photos.g.length > 0 
-                           ? photos.g[0] 
-                           : (photos && photos.m && photos.m.length > 0 ? photos.m[0] : `https://images.kabum.com.br/produtos/fotos/${lastResortItem.id}/${lastResortItem.id}_index_g.jpg`);
+        // FASE 2: Decisão de qual item usar
+        let chosenItem = null;
+        let chosenUrl = '';
+        let appliedReason = part.reason;
 
-          finalFoundPart = {
-            component: part.componentName,
-            name: lastResortItem.attributes.title,
-            price: price,
-            link: productLink,
-            photo: photoUrl,
-            reason: part.reason + " [Peça inflacionada - Selecionada via Fallback de Sobrevivência]"
-          };
+        if (finalFoundPart) {
+           // Já veio do cache
+        } else if (bestItemStrict) {
+           chosenItem = bestItemStrict;
+           chosenUrl = bestItemStrictUrl;
+        } else if (bestItemExtended) {
+           chosenItem = bestItemExtended;
+           chosenUrl = bestItemExtendedUrl;
+           console.log(`[Tolerância Ativada] ${part.componentName} estourou o maxPrice estrito, usando margem +30%.`);
+           appliedReason += " [Nota: O mercado está em alta, usamos uma margem extra de orçamento para garantir essa peça.]";
+        } else if (lastResortItem) {
+           chosenItem = lastResortItem;
+           chosenUrl = lastResortUrl;
+           console.log(`[Ultimate Fallback] Orçamento completamente estourado para ${part.componentName}.`);
+           appliedReason += " [⚠️ PEÇA INFLACIONADA - Fallback de Sobrevivência Ativado. Não havia peças no orçamento.]";
+        }
 
-          this.cache.set(lastResortUrl, { part: finalFoundPart, timestamp: Date.now() });
+        // FASE 3: Montagem e Envio
+        if (!finalFoundPart && chosenItem) {
+           const price = chosenItem.attributes.price_with_discount || chosenItem.attributes.price;
+           const productLink = `https://www.kabum.com.br/produto/${chosenItem.id}/${chosenItem.attributes.product_link}`;
+           const photos = chosenItem.attributes.photos;
+           const photoUrl = photos && photos.g && photos.g.length > 0 ? photos.g[0] : 
+                            (photos && photos.m && photos.m.length > 0 ? photos.m[0] : `https://images.kabum.com.br/produtos/fotos/${chosenItem.id}/${chosenItem.id}_index_g.jpg`);
+
+           finalFoundPart = {
+             component: part.componentName,
+             name: chosenItem.attributes.title,
+             price: price,
+             link: productLink,
+             photo: photoUrl,
+             reason: appliedReason
+           };
+
+           this.cache.set(chosenUrl, { part: finalFoundPart, timestamp: Date.now() });
         }
 
         if (finalFoundPart) {
@@ -154,7 +146,6 @@ export class ScraperService {
         console.error(`[Erro] Falha ao processar componente ${part.componentName}`);
       }
 
-      // Respiro Anti-DDoS entre peças diferentes
       await new Promise(r => setTimeout(r, 300));
     }
 

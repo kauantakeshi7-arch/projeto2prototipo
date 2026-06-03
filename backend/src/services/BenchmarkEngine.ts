@@ -18,15 +18,25 @@ export class BenchmarkEngine {
       { game: 'GTA V / CoD', fps: 60, quality: 'Normal' },
       { game: 'Cyberpunk 2077', fps: 30, quality: 'Muito Baixo (FSR)' }
     ],
+    '3200g': [
+      { game: 'CS2 / Valorant', fps: 90, quality: 'Baixo' },
+      { game: 'GTA V / CoD', fps: 50, quality: 'Normal' },
+      { game: 'Cyberpunk 2077', fps: 20, quality: 'Muito Baixo (Injogável)' }
+    ],
     '4600g': [
-      { game: 'CS2 / Valorant', fps: 100, quality: 'Baixo' },
+      { game: 'CS2 / Valorant', fps: 110, quality: 'Baixo' },
       { game: 'GTA V / CoD', fps: 55, quality: 'Normal' },
-      { game: 'Cyberpunk 2077', fps: 25, quality: 'Baixo' }
+      { game: 'Cyberpunk 2077', fps: 25, quality: 'Baixo (FSR Performance)' }
     ],
     '5600g': [
       { game: 'CS2 / Valorant', fps: 130, quality: 'Baixo' },
       { game: 'GTA V / CoD', fps: 65, quality: 'Normal' },
       { game: 'Cyberpunk 2077', fps: 30, quality: 'Baixo (FSR)' }
+    ],
+    '8600g': [
+      { game: 'CS2 / Valorant', fps: 200, quality: 'Alto' },
+      { game: 'GTA V / CoD', fps: 90, quality: 'Alto' },
+      { game: 'Cyberpunk 2077', fps: 45, quality: 'Baixo (FSR Quality)' }
     ],
     
     // Placas Dedicadas AMD
