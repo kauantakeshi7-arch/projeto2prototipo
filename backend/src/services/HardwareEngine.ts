@@ -8,6 +8,8 @@ export interface FoundPart {
   price: number;
   link: string;
   photo: string;
+  socket?: string;
+  ramType?: string;
   reason?: string;
 }
 
@@ -50,10 +52,13 @@ export class HardwareEngine {
             // Se não tem GPU, a CPU OBRIGATORIAMENTE precisa ter final 'g' (Vídeo Integrado)
             if (!gpu && !cpu.id.endsWith('g')) continue;
             for (const mb of mbs) {
-                // Compatibilidade de Socket (Simplificada para AM4 neste MVP, mas expansível)
-                // Assumimos que todos os itens no nosso mock são AM4/DDR4 por enquanto, mas na vida real checaríamos p.socket
+                // Compatibilidade de Socket
+                if (cpu.socket && mb.socket && cpu.socket !== mb.socket) continue;
                 
                 for (const ram of rams) {
+                    // Compatibilidade de RAM
+                    if (mb.ramType && ram.ramType && mb.ramType !== ram.ramType) continue;
+
                     for (const ssd of ssds) {
                         for (const psu of psus) {
                             for (const c of cases) {

@@ -5,7 +5,8 @@
     "name": "Processador AMD Ryzen 5 8600G, 4.3 GHz (5.0GHz Max Turbo), Cache 6MB, 6 Núcleos, 12 Threads, AM5, Vídeo Integrado - 100-100001237BOX",
     "price": 1943.78,
     "link": "https://www.kabum.com.br/produto/520365/processador-amd-ryzen-5-8600g-4-3-ghz-5-0ghz-max-turbo-cache-6mb-6-nucleos-12-threads-am5-video-integrado-100-100001237box",
-    "photo": "https://images.kabum.com.br/produtos/fotos/520365/processador-amd-ryzen-5-8600g-100-100001237box_1706637579_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/520365/processador-amd-ryzen-5-8600g-100-100001237box_1706637579_m.jpg",
+    "socket": "AM5"
   },
   "cpu_5600g": {
     "id": "cpu_5600g",
@@ -13,7 +14,8 @@
     "name": "Processador AMD Ryzen 5 5600GT + Placa-Mãe Gigabyte B550M Aorus Elite Rev. 1.3",
     "price": 1389.99,
     "link": "https://www.kabum.com.br/produto/1016362/processador-amd-ryzen-5-5600gt-placa-mae-gigabyte-b550m-aorus-elite-rev-1-3",
-    "photo": "https://images.kabum.com.br/produtos/fotos/1016362/processador-amd-ryzen-5-5600gt-placa-mae-gigabyte-b550m-aorus-elite-rev-1-3_1773251705_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/1016362/processador-amd-ryzen-5-5600gt-placa-mae-gigabyte-b550m-aorus-elite-rev-1-3_1773251705_m.jpg",
+    "socket": "AM4"
   },
   "cpu_5600": {
     "id": "cpu_5600",
@@ -21,7 +23,8 @@
     "name": "Processador AMD Ryzen 5 5500, 3.6GHz (4.2GHz Max Turbo), Cache 19MB, AM4, Sem Vídeo - 100-100000457BOX",
     "price": 1138.23,
     "link": "https://www.kabum.com.br/produto/320799/processador-amd-ryzen-5-5500-3-6ghz-4-2ghz-max-turbo-cache-19mb-am4-sem-video-100-100000457box",
-    "photo": "https://images.kabum.com.br/produtos/fotos/320799/processador-amd-ryzen-5-5500-cache-19mb-3-7ghz-4-2ghz-max-turbo-am4-100-100000457box_1647636796_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/320799/processador-amd-ryzen-5-5500-cache-19mb-3-7ghz-4-2ghz-max-turbo-am4-100-100000457box_1647636796_m.jpg",
+    "socket": "AM4"
   },
   "mb_a520m": {
     "id": "mb_a520m",
@@ -29,7 +32,9 @@
     "name": "Placa-Mãe ASUS PRIME A620M-E, AMD AM5, A620, mATX, DDR5, Preto - 90MB1F50-M0EAY0",
     "price": 804.9,
     "link": "https://www.kabum.com.br/produto/521066/placa-mae-asus-prime-a620m-e-amd-am5-a620-matx-ddr5-preto-90mb1f50-m0eay0",
-    "photo": "https://images.kabum.com.br/produtos/fotos/521066/placa-mae-asus-prime-a620m-e-amd-am5-a620-matx-ddr5-90mb1f50-m0eay0_1720800197_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/521066/placa-mae-asus-prime-a620m-e-amd-am5-a620-matx-ddr5-90mb1f50-m0eay0_1720800197_m.jpg",
+    "socket": "AM5",
+    "ramType": "DDR5"
   },
   "mb_b450m": {
     "id": "mb_b450m",
@@ -37,7 +42,9 @@
     "name": "Placa-Mãe MSI B850M Gaming Pro WiFi 6E, AMD AM5, mATX, DDR5 - B850MGPROWIFI6E",
     "price": 1699.99,
     "link": "https://www.kabum.com.br/produto/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e",
-    "photo": "https://images.kabum.com.br/produtos/fotos/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e_1777469188_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e_1777469188_m.jpg",
+    "socket": "AM5",
+    "ramType": "DDR5"
   },
   "mb_b550m": {
     "id": "mb_b550m",
@@ -45,7 +52,9 @@
     "name": "Placa-Mãe MSI B850M Gaming Pro WiFi 6E, AMD AM5, mATX, DDR5 - B850MGPROWIFI6E",
     "price": 1699.99,
     "link": "https://www.kabum.com.br/produto/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e",
-    "photo": "https://images.kabum.com.br/produtos/fotos/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e_1777469188_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e_1777469188_m.jpg",
+    "socket": "AM5",
+    "ramType": "DDR5"
   },
   "ram_8gb_ddr4": {
     "id": "ram_8gb_ddr4",
@@ -53,7 +62,8 @@
     "name": "Memória RAM Gamer Rise Mode Venon, ARGB, 8GB, 3200Mhz, DDR4, CL19, Preto - RM-D4-8G-3200-RGB",
     "price": 929.9,
     "link": "https://www.kabum.com.br/produto/466683/memoria-ram-gamer-rise-mode-venon-argb-8gb-3200mhz-ddr4-cl19-preto-rm-d4-8g-3200-rgb",
-    "photo": "https://images.kabum.com.br/produtos/fotos/466683/memoria-gamer-rise-mode-venon-rgb-8gb-3200mhz-ddr4-cl16-preto-rm-d4-8g-3200-rgb_1699980164_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/466683/memoria-gamer-rise-mode-venon-rgb-8gb-3200mhz-ddr4-cl16-preto-rm-d4-8g-3200-rgb_1699980164_m.jpg",
+    "ramType": "DDR4"
   },
   "ram_16gb_ddr4": {
     "id": "ram_16gb_ddr4",
@@ -61,7 +71,8 @@
     "name": "Memória RAM Gamer Rise Mode Venon, ARGB, 16GB, 3200Mhz, DDR4, CL19, Preto - RM-D4-16G-3200-RGB",
     "price": 845.9,
     "link": "https://www.kabum.com.br/produto/466684/memoria-ram-gamer-rise-mode-venon-argb-16gb-3200mhz-ddr4-cl19-preto-rm-d4-16g-3200-rgb",
-    "photo": "https://images.kabum.com.br/produtos/fotos/466684/memoria-gamer-rise-mode-venon-rgb-16gb-3200mhz-ddr4-cl16-preto-rm-d4-16g-3200-rgb_1699980266_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/466684/memoria-gamer-rise-mode-venon-rgb-16gb-3200mhz-ddr4-cl16-preto-rm-d4-16g-3200-rgb_1699980266_m.jpg",
+    "ramType": "DDR4"
   },
   "ram_32gb_ddr4": {
     "id": "ram_32gb_ddr4",
@@ -69,7 +80,8 @@
     "name": "Memória RAM Rise Mode Z, 32GB, 3200MHz, DDR4, CL19, Preto - RM-D4-32G-3200Z",
     "price": 1649.9,
     "link": "https://www.kabum.com.br/produto/475277/memoria-ram-rise-mode-z-32gb-3200mhz-ddr4-cl19-preto-rm-d4-32g-3200z",
-    "photo": "https://images.kabum.com.br/produtos/fotos/475277/memoria-rise-mode-z-32gb-3200mhz-ddr4-cl16-preto-rm-d4-32g-3200z_1698760443_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/475277/memoria-rise-mode-z-32gb-3200mhz-ddr4-cl16-preto-rm-d4-32g-3200z_1698760443_m.jpg",
+    "ramType": "DDR4"
   },
   "ssd_500gb": {
     "id": "ssd_500gb",
@@ -166,5 +178,43 @@
     "price": 649.99,
     "link": "https://www.kabum.com.br/produto/905364/gabinete-gamer-montech-heritage-pro-m-atx-mid-tower-vidro-temperado-4x-fans-preto-e-marrom-hrtgpbk",
     "photo": "https://images.kabum.com.br/produtos/fotos/905364/gabinete-gamer-montech-heritage-pro-mid-tower-vidro-temperado-preto-hrtgpbk_1756412406_m.jpg"
+  },
+  "mb_a520m_am4": {
+    "id": "mb_a520m_am4",
+    "component": "MB",
+    "name": "Placa-Mãe Gigabyte A520M K V2, AMD AM4, mATX, DDR4",
+    "price": 389.99,
+    "socket": "AM4",
+    "ramType": "DDR4",
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/428245/placa-mae-gigabyte-a520m-k-v2-amd-am4-matx-ddr4-rev-1-0-_1678888062_m.jpg"
+  },
+  "mb_b550m_am4": {
+    "id": "mb_b550m_am4",
+    "component": "MB",
+    "name": "Placa-Mãe MSI B550M PRO-VDH WIFI, AMD AM4, mATX, DDR4",
+    "price": 699.99,
+    "socket": "AM4",
+    "ramType": "DDR4",
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/114338/placa-mae-msi-b550m-pro-vdh-wifi-amd-am4-matx_1597843477_m.jpg"
+  },
+  "ram_16gb_ddr5": {
+    "id": "ram_16gb_ddr5",
+    "component": "RAM",
+    "name": "Memória Corsair Vengeance, 16GB, 5200MHz, DDR5, C40, Preto",
+    "price": 499.99,
+    "ramType": "DDR5",
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/383400/memoria-corsair-vengeance-16gb-5200mhz-ddr5-c40-preto-cmk16gx5m1b5200c40_1664369792_m.jpg"
+  },
+  "ram_32gb_ddr5": {
+    "id": "ram_32gb_ddr5",
+    "component": "RAM",
+    "name": "Memória Kingston Fury Beast, 32GB (2x16GB), 6000MHz, DDR5",
+    "price": 1099.99,
+    "ramType": "DDR5",
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/372370/memoria-kingston-fury-beast-rgb-16gb-6000mhz-ddr5-cl40-preto-kf560c40bbak2-32_1660312061_m.jpg"
   }
 }
