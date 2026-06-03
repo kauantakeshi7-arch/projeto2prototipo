@@ -16,7 +16,8 @@ export class NLPService {
     const prompt = `
       Você é um especialista em montagem de PCs. O usuário disse: "${budgetQuery}".
       Extraia o orçamento máximo em Reais (BRL) e a categoria de uso principal.
-      Responda APENAS com um JSON válido no formato: {"budget": number, "category": "office" | "gaming" | "heavy_gaming" | "workstation"}
+      Se o usuário mencionar alguma marca (ex: AMD, Intel, Nvidia, Asus, Corsair) ou cor (ex: branco, preto), inclua na chave "preferences".
+      Responda APENAS com um JSON válido no formato: {"budget": number, "category": "office" | "gaming" | "heavy_gaming" | "workstation", "preferences": {"brands": ["string"], "colors": ["string"]}}
     `;
 
     if (this.genAI) {
@@ -29,7 +30,8 @@ export class NLPService {
         
         return {
           budget: typeof parsed.budget === 'number' ? parsed.budget : 3500,
-          category: ['office', 'gaming', 'heavy_gaming', 'workstation'].includes(parsed.category) ? parsed.category : 'gaming'
+          category: ['office', 'gaming', 'heavy_gaming', 'workstation'].includes(parsed.category) ? parsed.category : 'gaming',
+          preferences: parsed.preferences
         };
       } catch (error) {
         console.error('[NLPService] Falha na IA Generativa, caindo para Fallback local.', error);
@@ -67,6 +69,18 @@ export class NLPService {
       category = 'office';
     }
     
-    return { budget, category };
+    // Semantic RegEx Fallback
+    const preferences: Intent['preferences'] = { brands: [], colors: [] };
+    const knownBrands = ['intel', 'amd', 'nvidia', 'asus', 'corsair', 'msi', 'gigabyte'];
+    const knownColors = ['branco', 'preto', 'white', 'black'];
+    
+    for (const b of knownBrands) {
+        if (qLower.includes(b)) preferences.brands!.push(b);
+    }
+    for (const c of knownColors) {
+        if (qLower.includes(c)) preferences.colors!.push(c);
+    }
+    
+    return { budget, category, preferences };
   }
 }

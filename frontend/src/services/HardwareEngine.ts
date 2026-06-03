@@ -10,11 +10,18 @@ export interface FoundPart {
   socket?: string;
   ramType?: string;
   reason?: string;
+  hasIntegratedGraphics?: boolean;
+  formFactor?: string;
+  supportedFormFactors?: string[];
 }
 
 export interface Intent {
   budget: number;
   category: 'office' | 'gaming' | 'heavy_gaming' | 'workstation';
+  preferences?: {
+    brands?: string[];
+    colors?: string[];
+  };
 }
 
 export class HardwareEngine {
@@ -65,7 +72,7 @@ export class HardwareEngine {
     for (const cpu of cpus) {
         if (cpu.price > intent.budget) continue;
         for (const gpu of gpusToUse) {
-            if (!gpu && !cpu.id.endsWith('g')) continue;
+            if (!gpu && !cpu.hasIntegratedGraphics) continue;
             const gpuPrice = gpu ? gpu.price : 0;
             if (cpu.price + gpuPrice > intent.budget) continue;
             
@@ -85,6 +92,9 @@ export class HardwareEngine {
                             // CRÍTICO: Prevenção de queima/desarme da fonte de alimentação
                             if (this.getPsuWattage(psu) < this.getGpuRequiredWattage(gpu)) continue;
                             for (const c of cases) {
+                                // CRÍTICO: Trava de dimensão física da Placa-Mãe vs Gabinete
+                                if (mb.formFactor && c.supportedFormFactors && !c.supportedFormFactors.includes(mb.formFactor)) continue;
+
                                 const totalPrice = cpu.price + gpuPrice + mb.price + ram.price + ssd.price + psu.price + c.price;
 
                                 if (totalPrice < minPriceFound) {
@@ -100,6 +110,21 @@ export class HardwareEngine {
                                     }
 
                                     if (intent.budget > 4000 && ram.price < 200) score -= 1000;
+
+                                    // BÔNUS SEMÂNTICO DE SCORE (Preferências do Usuário)
+                                    if (intent.preferences) {
+                                        const comboNames = [cpu.name, mb.name, ram.name, ssd.name, psu.name, c.name, gpu?.name || ''].join(' ').toLowerCase();
+                                        if (intent.preferences.brands) {
+                                            for (const brand of intent.preferences.brands) {
+                                                if (comboNames.includes(brand.toLowerCase())) score += 800; // Boost moderado
+                                            }
+                                        }
+                                        if (intent.preferences.colors) {
+                                            for (const color of intent.preferences.colors) {
+                                                if (comboNames.includes(color.toLowerCase())) score += 600; 
+                                            }
+                                        }
+                                    }
 
                                     if (score > bestScore) {
                                         bestScore = score;

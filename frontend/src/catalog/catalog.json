@@ -6,7 +6,8 @@
     "price": 1943.78,
     "link": "https://www.kabum.com.br/produto/520365/processador-amd-ryzen-5-8600g-4-3-ghz-5-0ghz-max-turbo-cache-6mb-6-nucleos-12-threads-am5-video-integrado-100-100001237box",
     "photo": "https://images.kabum.com.br/produtos/fotos/520365/processador-amd-ryzen-5-8600g-100-100001237box_1706637579_m.jpg",
-    "socket": "AM5"
+    "socket": "AM5",
+    "hasIntegratedGraphics": true
   },
   "cpu_5600g": {
     "id": "cpu_5600g",
@@ -15,7 +16,8 @@
     "price": 1389.99,
     "link": "https://www.kabum.com.br/produto/1016362/processador-amd-ryzen-5-5600gt-placa-mae-gigabyte-b550m-aorus-elite-rev-1-3",
     "photo": "https://images.kabum.com.br/produtos/fotos/1016362/processador-amd-ryzen-5-5600gt-placa-mae-gigabyte-b550m-aorus-elite-rev-1-3_1773251705_m.jpg",
-    "socket": "AM4"
+    "socket": "AM4",
+    "hasIntegratedGraphics": true
   },
   "cpu_5600": {
     "id": "cpu_5600",
@@ -24,7 +26,8 @@
     "price": 1138.23,
     "link": "https://www.kabum.com.br/produto/320799/processador-amd-ryzen-5-5500-3-6ghz-4-2ghz-max-turbo-cache-19mb-am4-sem-video-100-100000457box",
     "photo": "https://images.kabum.com.br/produtos/fotos/320799/processador-amd-ryzen-5-5500-cache-19mb-3-7ghz-4-2ghz-max-turbo-am4-100-100000457box_1647636796_m.jpg",
-    "socket": "AM4"
+    "socket": "AM4",
+    "hasIntegratedGraphics": false
   },
   "mb_a520m": {
     "id": "mb_a520m",
@@ -34,7 +37,8 @@
     "link": "https://www.kabum.com.br/produto/521066/placa-mae-asus-prime-a620m-e-amd-am5-a620-matx-ddr5-preto-90mb1f50-m0eay0",
     "photo": "https://images.kabum.com.br/produtos/fotos/521066/placa-mae-asus-prime-a620m-e-amd-am5-a620-matx-ddr5-90mb1f50-m0eay0_1720800197_m.jpg",
     "socket": "AM5",
-    "ramType": "DDR5"
+    "ramType": "DDR5",
+    "formFactor": "mATX"
   },
   "mb_b450m": {
     "id": "mb_b450m",
@@ -44,7 +48,8 @@
     "link": "https://www.kabum.com.br/produto/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e",
     "photo": "https://images.kabum.com.br/produtos/fotos/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e_1777469188_m.jpg",
     "socket": "AM5",
-    "ramType": "DDR5"
+    "ramType": "DDR5",
+    "formFactor": "mATX"
   },
   "mb_b550m": {
     "id": "mb_b550m",
@@ -54,7 +59,8 @@
     "link": "https://www.kabum.com.br/produto/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e",
     "photo": "https://images.kabum.com.br/produtos/fotos/998751/placa-mae-msi-b850m-gaming-pro-wifi-6e-amd-am5-matx-ddr5-b850mgprowifi6e_1777469188_m.jpg",
     "socket": "AM5",
-    "ramType": "DDR5"
+    "ramType": "DDR5",
+    "formFactor": "mATX"
   },
   "ram_8gb_ddr4": {
     "id": "ram_8gb_ddr4",
@@ -177,7 +183,12 @@
     "name": "Gabinete Gamer Montech Heritage Pro, M-ATX, Mid-Tower, Vidro Temperado, 4X Fans, Preto e Marrom - HRTGPBK",
     "price": 649.99,
     "link": "https://www.kabum.com.br/produto/905364/gabinete-gamer-montech-heritage-pro-m-atx-mid-tower-vidro-temperado-4x-fans-preto-e-marrom-hrtgpbk",
-    "photo": "https://images.kabum.com.br/produtos/fotos/905364/gabinete-gamer-montech-heritage-pro-mid-tower-vidro-temperado-preto-hrtgpbk_1756412406_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/905364/gabinete-gamer-montech-heritage-pro-mid-tower-vidro-temperado-preto-hrtgpbk_1756412406_m.jpg",
+    "supportedFormFactors": [
+      "ATX",
+      "mATX",
+      "ITX"
+    ]
   },
   "mb_a520m_am4": {
     "id": "mb_a520m_am4",
@@ -187,7 +198,8 @@
     "socket": "AM4",
     "ramType": "DDR4",
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/428245/placa-mae-gigabyte-a520m-k-v2-amd-am4-matx-ddr4-rev-1-0-_1678888062_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/428245/placa-mae-gigabyte-a520m-k-v2-amd-am4-matx-ddr4-rev-1-0-_1678888062_m.jpg",
+    "formFactor": "mATX"
   },
   "mb_b550m_am4": {
     "id": "mb_b550m_am4",
@@ -197,7 +209,8 @@
     "socket": "AM4",
     "ramType": "DDR4",
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/114338/placa-mae-msi-b550m-pro-vdh-wifi-amd-am4-matx_1597843477_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/114338/placa-mae-msi-b550m-pro-vdh-wifi-amd-am4-matx_1597843477_m.jpg",
+    "formFactor": "mATX"
   },
   "ram_16gb_ddr5": {
     "id": "ram_16gb_ddr5",
