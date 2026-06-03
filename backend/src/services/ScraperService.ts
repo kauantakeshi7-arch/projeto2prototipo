@@ -28,7 +28,7 @@ export class ScraperService {
     for (const part of parts) {
       try {
         const query = encodeURIComponent(part.searchQuery);
-        const kabumUrl = `https://servicespub.prod.api.aws.grupokabum.com.br/catalog/v2/products?query=${query}&page_number=1&page_size=20&facet_filters=eyJoYXNfb2ZmZXIiOlsiZmFsc2UiXX0=&sort=price`;
+        const kabumUrl = `https://servicespub.prod.api.aws.grupokabum.com.br/catalog/v2/products?query=${query}&page_number=1&page_size=20&sort=price`;
 
         // Verifica o Cache
         const cached = this.cache.get(kabumUrl);
@@ -65,6 +65,13 @@ export class ScraperService {
             bestItem = item;
             break;
           }
+        }
+
+        // Fallback Supremo: Se o mercado flutuou e nenhuma peça coube na margem exata,
+        // pegamos a mais barata encontrada que corresponda à busca!
+        if (!bestItem && items.length > 0) {
+          bestItem = items[0];
+          console.log(`[Fallback Ativado] Peça ${part.searchQuery} fora da margem. Pegando a mais próxima.`);
         }
 
         if (bestItem) {
