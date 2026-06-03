@@ -67,11 +67,18 @@ export class ScraperService {
           }
         }
 
-        // Fallback Supremo: Se o mercado flutuou e nenhuma peça coube na margem exata,
-        // pegamos a mais barata encontrada que corresponda à busca!
+        // Tolerância Dinâmica: Se o mercado inflacionou e não achamos na margem estrita,
+        // tentamos buscar esticando o teto máximo em +30%, sem desligar o piso mínimo!
         if (!bestItem && items.length > 0) {
-          bestItem = items[0];
-          console.log(`[Fallback Ativado] Peça ${part.searchQuery} fora da margem. Pegando a mais próxima.`);
+          const extendedMax = part.maxPrice * 1.3;
+          for (const item of items) {
+            const price = item.attributes.price_with_discount || item.attributes.price;
+            if (price >= part.minPrice && price <= extendedMax) {
+              bestItem = item;
+              console.log(`[Tolerância Ativada] Peça ${part.searchQuery} selecionada com margem de +30%.`);
+              break;
+            }
+          }
         }
 
         if (bestItem) {
