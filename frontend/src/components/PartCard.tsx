@@ -21,12 +21,15 @@ export function PartCard({ part }: PartCardProps) {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      className="bg-[#0f1115] border border-[#1e222a] rounded-xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg hover:border-[#2a2f3a] transition-colors"
+      layout
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4 }}
+      className="bg-[#0a0a0a] border border-[#222222] rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-[#333333] transition-colors"
     >
       <div className="flex items-center gap-4 w-full md:w-auto">
-        <div className="w-16 h-16 bg-black rounded-lg p-2 flex-shrink-0 flex items-center justify-center border border-[#1e222a]">
+        <div className="w-16 h-16 bg-[#111111] rounded-xl p-2 flex-shrink-0 flex items-center justify-center border border-[#222222]">
           {part.photo ? (
             <Image 
               src={part.photo} 
@@ -42,14 +45,14 @@ export function PartCard({ part }: PartCardProps) {
         </div>
         
         <div className="flex flex-col flex-grow">
-          <span className="text-emerald-400 text-xs font-bold uppercase tracking-wider mb-1 flex items-center gap-2">
+          <span className="text-emerald-500 text-[10px] md:text-xs font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
             <Cpu className="w-3 h-3" /> {part.component}
           </span>
-          <h3 className="text-slate-200 font-medium text-sm line-clamp-2 md:line-clamp-none">{part.name}</h3>
+          <h3 className="text-slate-100 font-semibold text-sm md:text-base leading-snug">{part.name}</h3>
           
           <button 
             onClick={() => setShowReason(!showReason)}
-            className="flex items-center gap-1 text-xs text-slate-400 mt-2 hover:text-emerald-400 transition-colors w-fit"
+            className="flex items-center gap-1.5 text-xs text-slate-500 mt-2 hover:text-emerald-400 transition-colors w-fit font-medium"
           >
             <Lightbulb className="w-3 h-3" />
             {showReason ? "Ocultar motivo" : "Por que escolhi esta peça?"}
@@ -64,7 +67,7 @@ export function PartCard({ part }: PartCardProps) {
                 exit={{ opacity: 0, height: 0, marginTop: 0 }}
                 className="overflow-hidden"
               >
-                <div className="bg-[#16191f] border border-[#1e222a] p-3 rounded-md text-xs text-slate-300 italic border-l-2 border-l-emerald-500">
+                <div className="bg-[#111111] border border-[#222222] p-3 md:p-4 rounded-xl text-xs md:text-sm text-slate-300 italic border-l-2 border-l-emerald-500 shadow-inner">
                   "{part.reason}"
                 </div>
               </motion.div>
@@ -73,15 +76,15 @@ export function PartCard({ part }: PartCardProps) {
         </div>
       </div>
       
-      <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto border-t md:border-t-0 border-[#1e222a] pt-4 md:pt-0 mt-2 md:mt-0">
-        <span className="text-white font-bold text-lg whitespace-nowrap">
+      <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto border-t md:border-t-0 border-[#222222] pt-4 md:pt-0 mt-2 md:mt-0">
+        <span className="text-white font-extrabold text-lg md:text-xl whitespace-nowrap tracking-tight">
           {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(part.price)}
         </span>
         <a 
           href={part.link.startsWith('http') ? part.link : `https://${part.link}`}
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-xs bg-[#1e222a] hover:bg-[#2a2f3a] text-slate-300 py-1 px-3 rounded-full transition-colors flex items-center gap-1 mt-0 md:mt-2"
+          className="mt-0 md:mt-2 text-xs font-bold bg-transparent border border-[#333333] hover:border-emerald-500/50 hover:bg-emerald-500/10 text-emerald-400 hover:text-emerald-300 py-1.5 px-4 rounded-full transition-all flex items-center gap-1.5"
         >
           Comprar <span className="text-emerald-500">↗</span>
         </a>

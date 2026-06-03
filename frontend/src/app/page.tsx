@@ -115,24 +115,25 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0c10] text-slate-300 font-sans selection:bg-emerald-500/30">
-      <div className="max-w-4xl mx-auto px-6 py-12">
+    <div className="min-h-screen bg-[#0a0a0a] text-slate-300 selection:bg-emerald-500/30">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-12">
         
-        <header className="text-center mb-16">
-          <div className="inline-flex items-center justify-center p-3 bg-emerald-500/10 rounded-2xl mb-6">
-            <Cpu className="text-emerald-500 w-8 h-8" />
-          </div>
-          <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 mb-4 tracking-tight">
-            AI PC Builder
-          </h1>
-          <p className="text-slate-400 max-w-xl mx-auto">
-            Diga o seu orçamento. O Arquiteto IA escolhe as melhores peças e o Buscador encontra os menores preços simultaneamente.
-          </p>
+        <header className={`transition-all duration-700 ease-in-out ${buildData || loading ? 'mb-8 mt-4' : 'mb-16 mt-12 md:mt-24'} text-center`}>
+          <motion.div layout>
+            <div className="inline-flex items-center justify-center p-3 bg-emerald-500/10 rounded-2xl mb-6 border border-emerald-500/20">
+              <Cpu className="text-emerald-500 w-8 h-8" />
+            </div>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+              AI PC Builder
+            </h1>
+            <p className="text-slate-400 max-w-xl mx-auto text-sm md:text-base">
+              Diga o seu orçamento. O Arquiteto IA escolhe as melhores peças e o Buscador encontra os menores preços simultaneamente.
+            </p>
+          </motion.div>
         </header>
 
-        <form onSubmit={executeBuild} className="relative max-w-2xl mx-auto mb-16 group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-          <div className="relative flex items-center bg-[#16191f] rounded-2xl border border-[#2a2f3a] focus-within:border-emerald-500/50 transition-colors shadow-2xl">
+        <form onSubmit={executeBuild} className={`relative max-w-2xl mx-auto transition-all duration-700 ease-in-out ${buildData || loading ? 'mb-8 md:mb-12' : 'mb-16'}`}>
+          <div className="relative flex items-center bg-[#111111] rounded-2xl border border-[#222222] focus-within:border-emerald-500/50 transition-colors shadow-2xl">
             <div className="pl-4 md:pl-6 shrink-0">
               <Search className="text-slate-500 w-5 h-5" />
             </div>
@@ -141,7 +142,7 @@ export default function Home() {
               value={query}
               onChange={e => setQuery(e.target.value)}
               placeholder="Ex: PC pra rodar Cyberpunk liso até R$ 8000"
-              className="flex-1 min-w-0 bg-transparent border-none py-4 md:py-6 pl-3 md:pl-4 pr-2 md:pr-4 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-0 text-base md:text-lg"
+              className="flex-1 min-w-0 bg-transparent border-none py-4 md:py-5 pl-3 md:pl-4 pr-2 md:pr-4 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-0 text-base"
               disabled={loading}
             />
             <div className="pr-2 md:pr-3 shrink-0">
@@ -156,51 +157,61 @@ export default function Home() {
           </div>
         </form>
 
-        {buildData && (
-          <div className="bg-[#12141a] rounded-3xl border border-[#1e222a] p-8 shadow-2xl">
-            {buildData.error ? (
-              <div className="text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl p-6 text-center font-medium">
-                {buildData.error}
+        {(buildData || loading) && (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-start">
+            
+            {/* Esquerda: Painel Fixo (Dashboard) */}
+            <div className="lg:col-span-4 lg:sticky lg:top-8 flex flex-col gap-6">
+              <div className="bg-[#111111] rounded-3xl border border-[#222222] p-6 md:p-8 shadow-2xl">
+                 <h2 className="text-xl font-bold text-white mb-4">
+                   {buildData?.setupName || (loading ? 'Construindo PC...' : 'Setup Encontrado')}
+                 </h2>
+                 {loading && (
+                   <div className="flex items-center gap-2 text-emerald-400 text-sm mb-6">
+                     <Loader2 className="w-4 h-4 animate-spin" />
+                     {loadingMessage}
+                   </div>
+                 )}
+                 <div className="pt-4 border-t border-[#222222]">
+                   <span className="text-xs text-slate-500 font-bold uppercase tracking-wider block mb-2">Custo Total Atual</span>
+                   <span className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                     {isClient && buildData?.totalPrice && buildData.totalPrice > 0 
+                       ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(buildData.totalPrice)
+                       : 'R$ 0,00'
+                     }
+                   </span>
+                 </div>
               </div>
-            ) : (
-              <>
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 pb-6 border-b border-[#1e222a] gap-4">
-                  <div>
-                    <h2 className="text-2xl font-bold text-white mb-2">
-                      {buildData.setupName || (loading ? 'Construindo PC...' : 'Setup Encontrado')}
-                    </h2>
-                    {loading && (
-                      <div className="flex items-center gap-2 text-emerald-400 text-sm">
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        {loadingMessage}
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="bg-black/50 border border-[#1e222a] rounded-xl p-4 min-w-[200px]">
-                    <span className="text-xs text-slate-500 font-bold uppercase tracking-wider block mb-1">Custo Total</span>
-                    <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
-                      {isClient && buildData.totalPrice > 0 
-                        ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(buildData.totalPrice)
-                        : '---'
-                      }
-                    </span>
-                  </div>
-                </div>
 
-                <div className="space-y-4">
-                  <AnimatePresence>
-                    {buildData.parts.map((part, idx) => (
-                      <PartCard key={idx} part={part} />
-                    ))}
-                  </AnimatePresence>
-                </div>
+              {!loading && buildData?.performanceMetrics && (
+                <FPSPanel metrics={buildData.performanceMetrics} />
+              )}
+            </div>
 
-                {!loading && buildData.performanceMetrics && (
-                  <FPSPanel metrics={buildData.performanceMetrics} />
-                )}
-              </>
-            )}
+            {/* Direita: Feed de Peças */}
+            <div className="lg:col-span-8 bg-[#111111] rounded-3xl border border-[#222222] p-4 md:p-8 shadow-2xl min-h-[400px]">
+               {buildData?.error ? (
+                 <div className="text-red-400 bg-red-400/10 border border-red-400/20 rounded-xl p-6 text-center font-medium">
+                   {buildData.error}
+                 </div>
+               ) : (
+                 <div className="space-y-4">
+                   <AnimatePresence mode="popLayout">
+                     {buildData?.parts.map((part, idx) => (
+                       <PartCard key={idx} part={part} />
+                     ))}
+                   </AnimatePresence>
+                   
+                   {loading && (!buildData || buildData.parts.length === 0) && (
+                     <div className="flex flex-col items-center justify-center h-[200px] text-slate-500">
+                       <Loader2 className="w-8 h-8 animate-spin mb-4 text-emerald-500/50" />
+                       <p className="text-sm">Buscando as melhores ofertas na Kabum...</p>
+                     </div>
+                   )}
+                 </div>
+               )}
+            </div>
+            
           </div>
         )}
       </div>

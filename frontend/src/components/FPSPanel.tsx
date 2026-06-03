@@ -20,7 +20,7 @@ export function FPSPanel({ metrics }: FPSPanelProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5, duration: 0.8 }}
-      className="bg-[#0f1115] border border-emerald-900/30 rounded-2xl p-6 mt-8 shadow-[0_0_40px_rgba(16,185,129,0.05)]"
+      className="pt-6 mt-6 border-t border-[#222222]"
     >
       <div className="flex items-center gap-3 mb-6">
         <div className="p-2 bg-emerald-500/10 rounded-lg">
@@ -44,7 +44,7 @@ export function FPSPanel({ metrics }: FPSPanelProps) {
                 <span className="text-xs text-slate-500">{m.quality}</span>
               </div>
               
-              <div className="w-full h-6 bg-[#16191f] rounded-full overflow-hidden border border-[#1e222a] relative">
+              <div className="w-full h-6 bg-[#0a0a0a] rounded-full overflow-hidden border border-[#222222] relative">
                 <motion.div
                   initial={{ width: 0 }}
                   animate={{ width: `${fillPercentage}%` }}
