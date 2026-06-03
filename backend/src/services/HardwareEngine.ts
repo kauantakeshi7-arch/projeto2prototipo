@@ -1,6 +1,7 @@
 export interface PCPartDefinition {
   componentName: string;
-  searchQuery: string;
+  searchQuery?: string;
+  searchQueries?: string[];
   minPrice: number;
   maxPrice: number;
   reason: string;
@@ -22,12 +23,12 @@ export class HardwareEngine {
     // Se o orçamento é baixo, usamos gráficos integrados (AM4)
     if (b < 2500 || intent.category === 'office') {
       return [
-        { componentName: "Processador", searchQuery: "Processador AMD Ryzen 3 3200G", minPrice: 300, maxPrice: 800, reason: "Processador com vídeo integrado forte (Radeon Graphics), ideal para cortar o custo absurdo de uma placa de vídeo dedicada." },
-        { componentName: "Placa Mãe", searchQuery: "Placa Mae A520M", minPrice: 300, maxPrice: 450, reason: "Placa mãe de entrada com soquete AM4. Cumpre o básico sem desperdiçar dinheiro em overclocking." },
-        { componentName: "Memória RAM", searchQuery: "Memoria Kingston Fury Beast 8GB DDR4", minPrice: 150, maxPrice: 800, reason: "Infelizmente os preços das memórias dispararam no mercado. 8GB é o mínimo absoluto hoje em dia." },
-        { componentName: "SSD", searchQuery: "SSD Kingston A400 240GB", minPrice: 150, maxPrice: 500, reason: "240GB é suficiente para o Windows e os principais jogos competitivos, garantindo inicialização rápida." },
-        { componentName: "Fonte", searchQuery: "Fonte 500W 80 Plus", minPrice: 200, maxPrice: 350, reason: "Selo 80 Plus garante eficiência energética. 500W sobra para essa máquina e garante upgrades futuros." },
-        { componentName: "Gabinete", searchQuery: "Gabinete Gamer", minPrice: 150, maxPrice: 250, reason: "Escolha baseada em melhor circulação de ar, prevenindo superaquecimento." }
+        { componentName: "Processador", searchQueries: ["Processador AMD Ryzen 5 4600G", "Processador AMD Ryzen 5 5600G", "Processador AMD Ryzen 3 3200G"], minPrice: 300, maxPrice: 800, reason: "Processador com vídeo integrado forte (Radeon Graphics), ideal para cortar o custo absurdo de uma placa de vídeo dedicada." },
+        { componentName: "Placa Mãe", searchQueries: ["Placa Mae A520M", "Placa Mae A320M", "Placa Mae B450M"], minPrice: 300, maxPrice: 500, reason: "Placa mãe de entrada com soquete AM4. Cumpre o básico sem desperdiçar dinheiro em overclocking." },
+        { componentName: "Memória RAM", searchQueries: ["Memoria Kingston Fury Beast 16GB DDR4", "Memoria Kingston Fury Beast 8GB DDR4", "Memoria 8GB DDR4 3200MHz"], minPrice: 150, maxPrice: 800, reason: "Infelizmente os preços das memórias dispararam no mercado. Tentamos 16GB, mas se faltar orçamento, pegamos 8GB para garantir o PC funcionando." },
+        { componentName: "SSD", searchQueries: ["SSD Kingston 500GB NVMe", "SSD Kingston A400 240GB", "SSD 240GB Sata"], minPrice: 150, maxPrice: 500, reason: "O objetivo é NVMe 500GB, mas em caso de crise caímos para 240GB SATA para garantir que coube no orçamento." },
+        { componentName: "Fonte", searchQueries: ["Fonte 500W 80 Plus", "Fonte 400W 80 Plus", "Fonte 400W"], minPrice: 150, maxPrice: 350, reason: "Selo 80 Plus garante eficiência energética. Tentamos 500W para sobrar, mas 400W segura PCs de entrada." },
+        { componentName: "Gabinete", searchQueries: ["Gabinete Gamer", "Gabinete ATX"], minPrice: 100, maxPrice: 250, reason: "Escolha baseada em melhor circulação de ar, prevenindo superaquecimento." }
       ];
     }
 
