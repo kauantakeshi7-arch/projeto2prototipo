@@ -25,7 +25,13 @@ export async function POST(req: NextRequest) {
     const writer = stream.writable.getWriter();
 
     const writeSSE = async (data: unknown) => {
-        await writer.write(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
+        try {
+            if (!req.signal.aborted) {
+                await writer.write(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
+            }
+        } catch (err) {
+            console.error("Erro ao escrever no stream (cliente pode ter desconectado):", err);
+        }
     };
 
     // A resposta deve ser retornada imediatamente com o ReadableStream
@@ -60,8 +66,10 @@ export async function POST(req: NextRequest) {
                 await new Promise(r => setTimeout(r, 300));
             }
 
+            if (req.signal.aborted) return;
             const performanceMetrics = BenchmarkEngine.calculate(bestCombo);
 
+            if (req.signal.aborted) return;
             await writeSSE({ status: 'DONE', totalPrice, performanceMetrics });
         } catch (error: unknown) {
             const errorMessage = error instanceof Error ? error.message : "Erro desconhecido.";
