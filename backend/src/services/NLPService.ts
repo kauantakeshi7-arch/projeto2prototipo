@@ -2,43 +2,41 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Intent } from './HardwareEngine';
 
 export class NLPService {
-  private genAI: GoogleGenerativeAI;
+  private genAI?: GoogleGenerativeAI;
   
   constructor() {
     if (!process.env.GEMINI_API_KEY) {
-      throw new Error('GEMINI_API_KEY não configurada');
+      console.warn('[NLPService] GEMINI_API_KEY não configurada. Usando fallback local (Regex).');
+    } else {
+      this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     }
-    this.genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
   }
 
   public async extractIntent(budgetQuery: string): Promise<Intent> {
-    const model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash-8b' }); // Modelo mais rápido e barato
-    
     const prompt = `
-      Analise o texto: "${budgetQuery}"
-      Seu único papel é extrair informações numéricas e categoria.
-      - Tente achar um orçamento máximo em Reais (BRL).
-      - Classifique a categoria entre: "office", "gaming", "heavy_gaming", "workstation". (Para GTA V, CSGO, LoL, classifique como "gaming". Para Cyberpunk, 4K, edição de vídeo, classifique como "heavy_gaming").
-      
-      Retorne EXATAMENTE um JSON válido com as chaves "budget" (numero inteiro) e "category" (string). Nada mais.
-      Exemplo: {"budget": 4500, "category": "gaming"}
+      Você é um especialista em montagem de PCs. O usuário disse: "${budgetQuery}".
+      Extraia o orçamento máximo em Reais (BRL) e a categoria de uso principal.
+      Responda APENAS com um JSON válido no formato: {"budget": number, "category": "office" | "gaming" | "heavy_gaming" | "workstation"}
     `;
 
-    try {
-      const response = await model.generateContent(prompt);
-      let text = response.response.text().trim();
-      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-      const parsed = JSON.parse(text);
-      
-      // Fallback seguro se a IA se confundir
-      return {
-        budget: typeof parsed.budget === 'number' ? parsed.budget : 3500,
-        category: ['office', 'gaming', 'heavy_gaming', 'workstation'].includes(parsed.category) ? parsed.category : 'gaming'
-      };
-    } catch (e) {
-      console.warn('NLP Engine falhou (limite de cota?), usando extrator Regex nativo.');
-      return this.extractIntentRegex(budgetQuery);
+    if (this.genAI) {
+      try {
+        const model = this.genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        const response = await model.generateContent(prompt);
+        let text = response.response.text().trim();
+        text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+        const parsed = JSON.parse(text);
+        
+        return {
+          budget: typeof parsed.budget === 'number' ? parsed.budget : 3500,
+          category: ['office', 'gaming', 'heavy_gaming', 'workstation'].includes(parsed.category) ? parsed.category : 'gaming'
+        };
+      } catch (error) {
+        console.error('[NLPService] Falha na IA Generativa, caindo para Fallback local.', error);
+      }
     }
+
+    return this.extractIntentRegex(budgetQuery);
   }
 
   // Backup do backup se o Google cair

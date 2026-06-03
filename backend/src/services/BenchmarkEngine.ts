@@ -1,4 +1,4 @@
-import { FoundPart } from './ScraperService';
+import { FoundPart } from './HardwareEngine';
 
 export interface GameFPS {
   game: string;
@@ -32,6 +32,11 @@ export class BenchmarkEngine {
       { game: 'CS2 / Valorant', fps: 130, quality: 'Baixo' },
       { game: 'GTA V / CoD', fps: 65, quality: 'Normal' },
       { game: 'Cyberpunk 2077', fps: 30, quality: 'Baixo (FSR)' }
+    ],
+    '5600gt': [
+      { game: 'CS2 / Valorant', fps: 140, quality: 'Médio' },
+      { game: 'GTA V / CoD', fps: 70, quality: 'Normal' },
+      { game: 'Cyberpunk 2077', fps: 35, quality: 'Baixo (FSR)' }
     ],
     '8600g': [
       { game: 'CS2 / Valorant', fps: 200, quality: 'Alto' },

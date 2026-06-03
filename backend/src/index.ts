@@ -4,8 +4,7 @@ dotenv.config();
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { NLPService } from './services/NLPService';
-import { HardwareEngine } from './services/HardwareEngine';
-import { ScraperService } from './services/ScraperService';
+import { HardwareEngine, Intent } from './services/HardwareEngine';
 import { BenchmarkEngine } from './services/BenchmarkEngine';
 
 const app = express();
@@ -19,7 +18,6 @@ app.use(express.json({ limit: '10kb' }));
 
 // Inicialização dos Serviços Core
 const nlpService = new NLPService();
-const scraperService = new ScraperService();
 
 /**
  * Novo Endpoint SSE (Server-Sent Events)
@@ -52,27 +50,28 @@ app.post('/api/build-pc-stream', async (req: Request, res: Response) => {
     // 1. NLP: Entende o texto e extrai o valor
     const intent = await nlpService.extractIntent(budgetQuery);
     console.log(`[NLP] Intenção mapeada:`, intent);
-    
-    if (isConnectionClosed) return res.end();
-    res.write(`data: ${JSON.stringify({ status: 'ENGINE_BUILDING', message: 'Construindo o chassi lógico compatível (Sockets e Tiers)...' })}\n\n`);
+    // 3. Montagem instantânea baseada no Catálogo
+    if (!isConnectionClosed) {
+      res.write(`data: ${JSON.stringify({ status: 'ENGINE_BUILDING', message: 'Calculando a melhor combinação no banco de dados...' })}\n\n`);
+    }
 
-    // 2. Motor Determinístico: Gera as queries absolutas
-    const partsList = HardwareEngine.buildSetup(intent);
-    
-    if (isConnectionClosed) return res.end();
-    res.write(`data: ${JSON.stringify({ status: 'SCRAPING', message: 'Buscando os melhores preços nas lojas (Tempo Real)...', setupName: 'PC Gamer Customizado (R$ ' + intent.budget + ')' })}\n\n`);
+    const foundParts = HardwareEngine.buildSetup(intent);
+    const totalPrice = foundParts.reduce((acc, p) => acc + p.price, 0);
 
-    // 3. Scraper Sequencial com Eventos
-    const foundParts = await scraperService.searchPartsStream(partsList, (part) => {
-      if (!isConnectionClosed) {
-        // Envia cada peça assim que é encontrada
+    // 4. Emissão das peças com delay de UI (Mock de raspagem para efeito visual)
+    if (!isConnectionClosed) {
+      res.write(`data: ${JSON.stringify({ status: 'SCRAPING', message: 'Recuperando melhores ofertas...' })}\n\n`);
+    }
+
+    for (const part of foundParts) {
+        if (isConnectionClosed) break;
+        // Simula o tempo de busca da peça para manter o efeito "UAU" da interface
+        await new Promise(r => setTimeout(r, 600)); 
         res.write(`data: ${JSON.stringify({ status: 'PART_FOUND', part })}\n\n`);
-      }
-    });
+    }
 
     if (isConnectionClosed) return res.end();
 
-    const totalPrice = foundParts.reduce((acc, curr) => acc + curr.price, 0);
     const performanceMetrics = BenchmarkEngine.calculate(foundParts);
 
     // 4. Finalização
