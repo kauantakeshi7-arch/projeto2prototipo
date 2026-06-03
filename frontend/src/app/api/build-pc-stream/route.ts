@@ -3,6 +3,8 @@ import { HardwareEngine } from '@/services/HardwareEngine';
 import { BenchmarkEngine } from '@/services/BenchmarkEngine';
 import { NLPService } from '@/services/NLPService';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
     let budgetQuery = '';
     

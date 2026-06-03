@@ -1,5 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+import catalogData from '../catalog/catalog.json';
 
 export interface FoundPart {
   id: string;
@@ -20,12 +19,7 @@ export interface Intent {
 
 export class HardwareEngine {
   private static getCatalog(): Record<string, FoundPart> {
-    const catalogPath = path.join(process.cwd(), 'src', 'catalog', 'catalog.json');
-    if (!fs.existsSync(catalogPath)) {
-        throw new Error("Catálogo offline não encontrado. Rode o script de atualização.");
-    }
-    const data = fs.readFileSync(catalogPath, 'utf-8');
-    return JSON.parse(data);
+    return catalogData as Record<string, FoundPart>;
   }
 
   public static buildSetup(intent: Intent): FoundPart[] {
