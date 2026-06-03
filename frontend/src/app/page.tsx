@@ -133,7 +133,7 @@ export default function Home() {
         <form onSubmit={executeBuild} className="relative max-w-2xl mx-auto mb-16 group">
           <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
           <div className="relative flex items-center bg-[#16191f] rounded-2xl border border-[#2a2f3a] focus-within:border-emerald-500/50 transition-colors shadow-2xl">
-            <div className="pl-6">
+            <div className="pl-4 md:pl-6 shrink-0">
               <Search className="text-slate-500 w-5 h-5" />
             </div>
             <input 
@@ -141,14 +141,14 @@ export default function Home() {
               value={query}
               onChange={e => setQuery(e.target.value)}
               placeholder="Ex: PC pra rodar Cyberpunk liso até R$ 8000"
-              className="w-full bg-transparent border-none py-6 pl-4 pr-32 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-0 text-lg"
+              className="flex-1 min-w-0 bg-transparent border-none py-4 md:py-6 pl-3 md:pl-4 pr-2 md:pr-4 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-0 text-base md:text-lg"
               disabled={loading}
             />
-            <div className="absolute right-3">
+            <div className="pr-2 md:pr-3 shrink-0">
               <button 
                 type="submit"
                 disabled={loading || !query.trim()}
-                className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-3 px-6 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-2.5 px-4 md:py-3 md:px-6 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm md:text-base"
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Montar Setup'}
               </button>
