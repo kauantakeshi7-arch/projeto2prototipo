@@ -42,45 +42,45 @@ export class HardwareEngine {
     const gpusToUse: (FoundPart | null)[] = [...gpus, null];
 
     for (const cpu of cpus) {
+        if (cpu.price > intent.budget) continue;
         for (const gpu of gpusToUse) {
-            // Se não tem GPU, a CPU OBRIGATORIAMENTE precisa ter final 'g' (Vídeo Integrado)
             if (!gpu && !cpu.id.endsWith('g')) continue;
+            const gpuPrice = gpu ? gpu.price : 0;
+            if (cpu.price + gpuPrice > intent.budget) continue;
+            
             for (const mb of mbs) {
-                // Compatibilidade de Socket
                 if (cpu.socket && mb.socket && cpu.socket !== mb.socket) continue;
+                if (cpu.price + gpuPrice + mb.price > intent.budget) continue;
                 
                 for (const ram of rams) {
-                    // Compatibilidade de RAM
                     if (mb.ramType && ram.ramType && mb.ramType !== ram.ramType) continue;
+                    if (cpu.price + gpuPrice + mb.price + ram.price > intent.budget) continue;
 
                     for (const ssd of ssds) {
+                        if (cpu.price + gpuPrice + mb.price + ram.price + ssd.price > intent.budget) continue;
                         for (const psu of psus) {
+                            if (cpu.price + gpuPrice + mb.price + ram.price + ssd.price + psu.price > intent.budget) continue;
                             for (const c of cases) {
-                                
-                                const combo = [cpu, mb, ram, ssd, psu, c];
-                                if (gpu) combo.push(gpu);
-
-                                const totalPrice = combo.reduce((sum, p) => sum + p.price, 0);
+                                const totalPrice = cpu.price + gpuPrice + mb.price + ram.price + ssd.price + psu.price + c.price;
 
                                 if (totalPrice < minPriceFound) {
                                     minPriceFound = totalPrice;
                                 }
 
                                 if (totalPrice <= intent.budget) {
-                                    // Pontuação baseada no valor investido em CPU e GPU (quanto mais cara, mais fps)
                                     let score = 0;
                                     if (gpu) {
                                         score = gpu.price * 1.5 + cpu.price * 1.0;
                                     } else {
-                                        score = cpu.price * 1.2; // APU
+                                        score = cpu.price * 1.2;
                                     }
 
-                                    // Penalidade leve se a RAM ou SSD for fraca para um PC caro
                                     if (intent.budget > 4000 && ram.price < 200) score -= 1000;
 
                                     if (score > bestScore) {
                                         bestScore = score;
-                                        bestCombo = combo;
+                                        bestCombo = [cpu, mb, ram, ssd, psu, c];
+                                        if (gpu) bestCombo.push(gpu);
                                     }
                                 }
                             }
