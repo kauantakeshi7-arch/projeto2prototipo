@@ -55,7 +55,7 @@ export function PartCard({ part }: PartCardProps) {
             className="flex items-center gap-1.5 text-xs text-slate-500 mt-2 hover:text-emerald-400 transition-colors w-fit font-medium"
           >
             <Lightbulb className="w-3 h-3" />
-            {showReason ? "Ocultar motivo" : "Por que escolhi esta peça?"}
+            {showReason ? "Ocultar motivo" : "Por que a IA escolheu essa peça para o seu &quot;setup&quot;?"}
             {showReason ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
           </button>
 
@@ -68,7 +68,7 @@ export function PartCard({ part }: PartCardProps) {
                 className="overflow-hidden"
               >
                 <div className="bg-[#111111] border border-[#222222] p-3 md:p-4 rounded-xl text-xs md:text-sm text-slate-300 italic border-l-2 border-l-emerald-500 shadow-inner">
-                  "{part.reason}"
+                  &quot;{part.reason}&quot;
                 </div>
               </motion.div>
             )}

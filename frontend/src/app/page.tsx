@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Search, Loader2, Cpu } from 'lucide-react';
 import { PartCard, PCPart } from '@/components/PartCard';
 import { FPSPanel, GameFPS } from '@/components/FPSPanel';
@@ -19,12 +19,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState('');
   const [buildData, setBuildData] = useState<BuildData | null>(null);
-  const [isClient, setIsClient] = useState(false);
   const abortControllerRef = useRef<AbortController | null>(null);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const isClient = typeof window !== 'undefined';
 
   const executeBuild = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,8 +102,8 @@ export default function Home() {
           }
         }
       }
-    } catch (err: any) {
-      if (err.name === 'AbortError') {
+    } catch (err: unknown) {
+      if (err instanceof Error && err.name === 'AbortError') {
         console.log('Busca abortada pelo usuário.');
       } else {
         setBuildData({ setupName: '', totalPrice: 0, parts: [], error: "Erro ao conectar com o Servidor ou a conexão caiu." });

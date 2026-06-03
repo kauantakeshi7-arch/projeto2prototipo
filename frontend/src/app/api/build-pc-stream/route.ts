@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
         budgetQuery = body.budgetQuery;
-    } catch (e) {
+    } catch {
         return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
     }
 
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     const stream = new TransformStream();
     const writer = stream.writable.getWriter();
 
-    const writeSSE = async (data: any) => {
+    const writeSSE = async (data: unknown) => {
         await writer.write(encoder.encode(`data: ${JSON.stringify(data)}\n\n`));
     };
 
@@ -63,8 +63,9 @@ export async function POST(req: NextRequest) {
             const performanceMetrics = BenchmarkEngine.calculate(bestCombo);
 
             await writeSSE({ status: 'DONE', totalPrice, performanceMetrics });
-        } catch (error: any) {
-            await writeSSE({ status: 'ERROR', message: error.message });
+        } catch (error: unknown) {
+            const errorMessage = error instanceof Error ? error.message : "Erro desconhecido.";
+            await writeSSE({ status: 'ERROR', message: errorMessage });
         } finally {
             await writer.close();
         }

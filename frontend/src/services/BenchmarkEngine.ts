@@ -79,7 +79,7 @@ export class BenchmarkEngine {
    */
   public static calculate(parts: FoundPart[]): GameFPS[] {
     // 1. Achar a Placa de Vídeo Dedicada
-    let gpu = parts.find(p => p.component === 'GPU');
+    const gpu = parts.find(p => p.component === 'GPU');
     
     // 2. Se não tem GPU dedicada, achar o Processador (Pode ter gráfico integrado)
     let cpu = null;
@@ -87,12 +87,10 @@ export class BenchmarkEngine {
       cpu = parts.find(p => p.component === 'CPU');
     }
 
-    const titleToParse = (gpu ? gpu.name : cpu?.name) || '';
     
     // Algoritmo de Normalização de Hardware Imparável:
     // Remove espaços, vírgulas, hífens e converte pra minúsculo.
     // Ex: "VGA ASUS NVIDIA GEFORCE RTX 4060 TI" -> "vgaasusnvidiageforcertx4060ti"
-    const normalized = titleToParse.toLowerCase().replace(/[^a-z0-9]/g, '');
 
     // 2. Se for PC com Placa de Vídeo Dedicada
     if (gpu) {
