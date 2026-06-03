@@ -22,6 +22,27 @@ export class HardwareEngine {
     return catalogData as Record<string, FoundPart>;
   }
 
+  private static getPsuWattage(psu: FoundPart): number {
+    const match = psu.name.match(/(\d{3,4})W/i);
+    if (match) return parseInt(match[1]);
+    if (psu.id.includes('650')) return 650;
+    if (psu.id.includes('750')) return 750;
+    if (psu.id.includes('850')) return 850;
+    if (psu.id.includes('1000')) return 1000;
+    return 500; 
+  }
+
+  private static getGpuRequiredWattage(gpu: FoundPart | null): number {
+    if (!gpu) return 300; 
+    const id = gpu.id.toLowerCase();
+    if (id.includes('4090') || id.includes('9070')) return 850;
+    if (id.includes('4080') || id.includes('7900')) return 750;
+    if (id.includes('4070') || id.includes('7800')) return 650;
+    if (id.includes('4060') || id.includes('6700')) return 550;
+    if (id.includes('3060') || id.includes('6600')) return 500;
+    return 500;
+  }
+
   public static buildSetup(intent: Intent): FoundPart[] {
     const catalog = this.getCatalog();
     const parts = Object.values(catalog);
@@ -60,6 +81,9 @@ export class HardwareEngine {
                         if (cpu.price + gpuPrice + mb.price + ram.price + ssd.price > intent.budget) continue;
                         for (const psu of psus) {
                             if (cpu.price + gpuPrice + mb.price + ram.price + ssd.price + psu.price > intent.budget) continue;
+                            
+                            // CRÍTICO: Prevenção de queima/desarme da fonte de alimentação
+                            if (this.getPsuWattage(psu) < this.getGpuRequiredWattage(gpu)) continue;
                             for (const c of cases) {
                                 const totalPrice = cpu.price + gpuPrice + mb.price + ram.price + ssd.price + psu.price + c.price;
 
