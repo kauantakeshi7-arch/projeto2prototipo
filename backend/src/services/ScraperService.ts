@@ -27,7 +27,7 @@ export class ScraperService {
 
         for (let i = 0; i < queries.length; i++) {
             const query = queries[i];
-            const kabumUrl = `https://servicespub.prod.api.aws.grupokabum.com.br/catalog/v2/products?query=${encodeURIComponent(query)}&page_number=1&page_size=20&sort=price`;
+            const kabumUrl = `https://servicespub.prod.api.aws.grupokabum.com.br/catalog/v2/products?query=${encodeURIComponent(query)}&page_number=1&page_size=50&sort=price`;
             
             try {
               const kabumRes = await axios.get(kabumUrl, {
@@ -47,7 +47,8 @@ export class ScraperService {
                   // BLOQUEIO ANTI-MARKETPLACE: Ignoramos lojistas terceiros que inflam preços.
                   if (isMarketplace) continue;
                   
-                  if (!price || price < 10) continue; // Evita lixos de 1 real
+                  // BLOQUEIO ANTI-ACESSÓRIOS: Usamos minPrice para ignorar cabos/pastas térmicas
+                  if (!price || price < (part.minPrice || 50)) continue;
 
                   // Como filtramos marketplace e a busca já está ordenada por menor preço, 
                   // o primeiro item que respeitar o maxPrice é a nossa escolha definitiva.
