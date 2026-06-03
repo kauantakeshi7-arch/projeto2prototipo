@@ -22,10 +22,10 @@ export class HardwareEngine {
     // Se o orçamento é baixo, usamos gráficos integrados (AM4)
     if (b < 2500 || intent.category === 'office') {
       return [
-        { componentName: "Processador", searchQuery: "Processador Ryzen 5 4600G", minPrice: 500, maxPrice: 700, reason: "Processador com vídeo integrado forte (Radeon Graphics), ideal para cortar o custo absurdo de uma placa de vídeo dedicada." },
+        { componentName: "Processador", searchQuery: "Processador AMD Ryzen 3 3200G", minPrice: 300, maxPrice: 800, reason: "Processador com vídeo integrado forte (Radeon Graphics), ideal para cortar o custo absurdo de uma placa de vídeo dedicada." },
         { componentName: "Placa Mãe", searchQuery: "Placa Mae A520M", minPrice: 300, maxPrice: 450, reason: "Placa mãe de entrada com soquete AM4. Cumpre o básico sem desperdiçar dinheiro em overclocking." },
-        { componentName: "Memória RAM", searchQuery: "Memoria Kingston 16GB DDR4", minPrice: 150, maxPrice: 250, reason: "16GB é o mínimo absoluto hoje em dia, e a alta frequência faz a placa de vídeo integrada do Ryzen render muito mais." },
-        { componentName: "SSD", searchQuery: "SSD Kingston 500GB", minPrice: 150, maxPrice: 250, reason: "O formato NVMe M.2 é 10x mais rápido que um HD tradicional, ligando o PC e abrindo programas em segundos." },
+        { componentName: "Memória RAM", searchQuery: "Memoria Kingston Fury Beast 8GB DDR4", minPrice: 150, maxPrice: 800, reason: "Infelizmente os preços das memórias dispararam no mercado. 8GB é o mínimo absoluto hoje em dia." },
+        { componentName: "SSD", searchQuery: "SSD Kingston A400 240GB", minPrice: 150, maxPrice: 500, reason: "240GB é suficiente para o Windows e os principais jogos competitivos, garantindo inicialização rápida." },
         { componentName: "Fonte", searchQuery: "Fonte 500W 80 Plus", minPrice: 200, maxPrice: 350, reason: "Selo 80 Plus garante eficiência energética. 500W sobra para essa máquina e garante upgrades futuros." },
         { componentName: "Gabinete", searchQuery: "Gabinete Gamer", minPrice: 150, maxPrice: 250, reason: "Escolha baseada em melhor circulação de ar, prevenindo superaquecimento." }
       ];
