@@ -40,14 +40,16 @@ export default function Home() {
     setBuildData({ setupName: '', totalPrice: 0, parts: [] });
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
-      const response = await fetch(`${apiUrl}/api/build-pc-stream`, {
+      const response = await fetch('/api/build-pc-stream', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ budgetQuery: query }),
         signal: abortControllerRef.current.signal
       });
 
+      if (!response.ok) {
+        throw new Error(`Erro na API (${response.status})`);
+      }
       if (!response.body) throw new Error("Sem corpo de resposta");
 
       const reader = response.body.getReader();
@@ -108,9 +110,10 @@ export default function Home() {
       if (err.name === 'AbortError') {
         console.log('Busca abortada pelo usuário.');
       } else {
-        setBuildData({ setupName: '', totalPrice: 0, parts: [], error: "Erro ao conectar com o Servidor." });
-        setLoading(false);
+        setBuildData({ setupName: '', totalPrice: 0, parts: [], error: "Erro ao conectar com o Servidor ou a conexão caiu." });
       }
+    } finally {
+      setLoading(false);
     }
   };
 
