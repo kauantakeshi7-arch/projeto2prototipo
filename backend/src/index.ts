@@ -82,7 +82,7 @@ app.post('/api/build-pc-stream', async (req: Request, res: Response) => {
   } catch (error: any) {
     console.error('Erro no servidor SSE:', error);
     if (!isConnectionClosed) {
-      res.write(`data: ${JSON.stringify({ status: 'ERROR', message: 'Falha crítica interna no servidor.' })}\n\n`);
+      res.write(`data: ${JSON.stringify({ status: 'ERROR', message: error.message || 'Falha crítica interna no servidor.' })}\n\n`);
       res.end();
     }
   }
