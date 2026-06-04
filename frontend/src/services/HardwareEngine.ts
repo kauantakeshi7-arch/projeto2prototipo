@@ -126,6 +126,10 @@ export class HardwareEngine {
                                 
                                 // 3. Anomalia de Prioridade: SSD não deve ser abusivamente mais caro que a Placa Mãe
                                 if (ssd.price > mb.price * 2) continue;
+
+                                // 4. Gargalo Reverso: Placa-mãe estupidamente cara para um Processador básico (Bloqueia placa de R$ 4500 com CPU de R$ 600)
+                                if (mb.price > cpu.price * 2.5) continue;
+
                                 for (const cooler of coolersToUse) {
                                     // REGRAS DE TERMODINÂMICA E FÍSICA AVANÇADA (GOD TIER)
                                     // 1. Processador topo de linha VEM SEM COOLER na caixa. É OBRIGATÓRIO comprar um.
@@ -140,8 +144,8 @@ export class HardwareEngine {
                                     // 4. MOTOR DE GEOMETRIA 3D (Colisão GPU vs Gabinete)
                                     if (gpu && gpu.length && c.maxGpuLength) {
                                         let actualClearance = c.maxGpuLength;
-                                        // Se compramos um Water Cooler de 360mm ou 240mm, ele geralmente vai na frente do gabinete e rouba 50mm de espaço da GPU
-                                        if (cooler && cooler.id.includes('water')) {
+                                        // Se compramos um Water Cooler e o gabinete não for Full Tower, ele vai na frente e rouba 50mm
+                                        if (cooler && cooler.id.includes('water') && c.id !== 'case_fulltower') {
                                             actualClearance -= 50;
                                         }
                                         if (gpu.length > actualClearance) {

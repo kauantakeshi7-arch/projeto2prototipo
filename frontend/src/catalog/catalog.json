@@ -6,7 +6,7 @@
     "price": 650,
     "link": "https://www.kabum.com.br/produto/520365/processador-amd-ryzen-5-8600g-4-3-ghz-5-0ghz-max-turbo-cache-6mb-6-nucleos-12-threads-am5-video-integrado-100-100001237box",
     "photo": "https://images.kabum.com.br/produtos/fotos/520365/processador-amd-ryzen-5-8600g-100-100001237box_1706637579_m.jpg",
-    "socket": "AM5",
+    "socket": "AM4",
     "hasIntegratedGraphics": true,
     "includesCooler": true
   },
