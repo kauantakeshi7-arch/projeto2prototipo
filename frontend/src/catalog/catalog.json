@@ -7,7 +7,8 @@
     "link": "https://www.kabum.com.br/produto/520365/processador-amd-ryzen-5-8600g-4-3-ghz-5-0ghz-max-turbo-cache-6mb-6-nucleos-12-threads-am5-video-integrado-100-100001237box",
     "photo": "https://images.kabum.com.br/produtos/fotos/520365/processador-amd-ryzen-5-8600g-100-100001237box_1706637579_m.jpg",
     "socket": "AM5",
-    "hasIntegratedGraphics": true
+    "hasIntegratedGraphics": true,
+    "includesCooler": true
   },
   "cpu_5600g": {
     "id": "cpu_5600g",
@@ -17,7 +18,8 @@
     "link": "https://www.kabum.com.br/produto/1016362/processador-amd-ryzen-5-5600gt-placa-mae-gigabyte-b550m-aorus-elite-rev-1-3",
     "photo": "https://images.kabum.com.br/produtos/fotos/1016362/processador-amd-ryzen-5-5600gt-placa-mae-gigabyte-b550m-aorus-elite-rev-1-3_1773251705_m.jpg",
     "socket": "AM4",
-    "hasIntegratedGraphics": true
+    "hasIntegratedGraphics": true,
+    "includesCooler": true
   },
   "cpu_5600": {
     "id": "cpu_5600",
@@ -27,7 +29,8 @@
     "link": "https://www.kabum.com.br/produto/320799/processador-amd-ryzen-5-5500-3-6ghz-4-2ghz-max-turbo-cache-19mb-am4-sem-video-100-100000457box",
     "photo": "https://images.kabum.com.br/produtos/fotos/320799/processador-amd-ryzen-5-5500-cache-19mb-3-7ghz-4-2ghz-max-turbo-am4-100-100000457box_1647636796_m.jpg",
     "socket": "AM4",
-    "hasIntegratedGraphics": false
+    "hasIntegratedGraphics": false,
+    "includesCooler": true
   },
   "mb_a520m": {
     "id": "mb_a520m",
@@ -238,7 +241,8 @@
     "link": "https://www.kabum.com.br/",
     "photo": "https://images.kabum.com.br/produtos/fotos/446210/processador-amd-ryzen-7-7800x3d-5-0ghz-max-turbo-cache-104mb-am5-sem-video-100-100000910wof_1680721731_m.jpg",
     "socket": "AM5",
-    "hasIntegratedGraphics": true
+    "hasIntegratedGraphics": true,
+    "includesCooler": false
   },
   "cpu_i9_14900k": {
     "id": "cpu_i9_14900k",
@@ -248,7 +252,8 @@
     "link": "https://www.kabum.com.br/",
     "photo": "https://images.kabum.com.br/produtos/fotos/496030/processador-intel-core-i9-14900k-14-geracao-6-0ghz-max-turbo-cache-36mb-24-nucleos-32-threads-lga-1700-video-integrado-bx8071514900k_1697548232_m.jpg",
     "socket": "LGA1700",
-    "hasIntegratedGraphics": true
+    "hasIntegratedGraphics": true,
+    "includesCooler": false
   },
   "mb_x670e": {
     "id": "mb_x670e",
@@ -350,5 +355,29 @@
       "mATX",
       "ITX"
     ]
+  },
+  "cooler_air": {
+    "id": "cooler_air",
+    "component": "COOLER",
+    "name": "Air Cooler DeepCool AG400, 120mm",
+    "price": 150,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/400810/cooler-para-processador-deepcool-ag400-120mm-r-ag400-bknnmn-g-1_1672322312_m.jpg"
+  },
+  "cooler_water_240": {
+    "id": "cooler_water_240",
+    "component": "COOLER",
+    "name": "Water Cooler Cooler Master MasterLiquid ML240L V2, 240mm",
+    "price": 450,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/112674/water-cooler-cooler-master-masterliquid-ml240l-v2-rgb-240mm-mlw-d24m-a18pc-r2_1589288258_m.jpg"
+  },
+  "cooler_water_360": {
+    "id": "cooler_water_360",
+    "component": "COOLER",
+    "name": "Water Cooler NZXT Kraken Elite 360, RGB, 360mm",
+    "price": 1800,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/476220/cooler-para-processador-nzxt-kraken-elite-360-rgb-360mm-intel-e-amd-preto-rl-kr36e-b1_1694002621_m.jpg"
   }
 }

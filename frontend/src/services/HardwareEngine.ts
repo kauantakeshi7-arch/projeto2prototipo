@@ -11,6 +11,7 @@ export interface FoundPart {
   ramType?: string;
   reason?: string;
   hasIntegratedGraphics?: boolean;
+  includesCooler?: boolean;
   formFactor?: string;
   supportedFormFactors?: string[];
 }
@@ -78,13 +79,15 @@ export class HardwareEngine {
     const ssds = parts.filter(p => p.component === 'SSD');
     const psus = parts.filter(p => p.component === 'PSU');
     const cases = parts.filter(p => p.component === 'CASE');
+    const coolers = parts.filter(p => p.component === 'COOLER');
 
     let bestCombo: FoundPart[] = [];
     let bestScore = -1;
     let minPriceFound = Infinity;
 
-    // Testaremos combos com e sem GPU dedicada, o solver prioriza a que der maior score (com GPU dá mais score, se couber)
+    // Testaremos combos com e sem GPU dedicada, e com e sem cooler
     const gpusToUse: (FoundPart | null)[] = [...gpus, null];
+    const coolersToUse: (FoundPart | null)[] = [...coolers, null];
 
     for (const cpu of cpus) {
         if (cpu.price > intent.budget) continue;
@@ -122,53 +125,69 @@ export class HardwareEngine {
                                 // 3. Anomalia de Prioridade: SSD não deve ser abusivamente mais caro que a Placa Mãe
                                 if (ssd.price > mb.price * 2) continue;
 
-                                const totalPrice = cpu.price + gpuPrice + mb.price + ram.price + ssd.price + psu.price + c.price;
+                                for (const cooler of coolersToUse) {
+                                    // REGRAS DE TERMODINÂMICA (COOLER ENGINE)
+                                    // 1. Processador topo de linha VEM SEM COOLER na caixa. É OBRIGATÓRIO comprar um.
+                                    if (!cooler && cpu.includesCooler === false) continue;
+                                    
+                                    // 2. Thermal Throttling: Processador muito quente exige Water Cooler decente
+                                    if (cooler && cpu.price > 2500 && cooler.price < 300) continue;
+                                    
+                                    // 3. Processador básico já vem com cooler grátis na caixa, comprar Water Cooler é rasgar dinheiro se o orçamento estiver apertado
+                                    if (cooler && cpu.includesCooler === true && intent.budget < 5000) continue;
 
-                                if (totalPrice < minPriceFound) {
-                                    minPriceFound = totalPrice;
-                                }
+                                    const coolerPrice = cooler ? cooler.price : 0;
+                                    const totalPrice = cpu.price + gpuPrice + mb.price + ram.price + ssd.price + psu.price + c.price + coolerPrice;
 
-                                if (totalPrice <= intent.budget) {
-                                    let score = 0;
-                                    if (gpu) {
-                                        score = (gpu.price * 1.5) + (cpu.price * 1.0) + (ram.price * 0.5) + (ssd.price * 0.4) + (mb.price * 0.3) + (psu.price * 0.3) + (c.price * 0.1);
-                                    } else {
-                                        score = (cpu.price * 1.2) + (ram.price * 0.6) + (ssd.price * 0.4) + (mb.price * 0.3) + (psu.price * 0.3) + (c.price * 0.1);
+                                    if (totalPrice < minPriceFound) {
+                                        minPriceFound = totalPrice;
                                     }
 
-                                    if (intent.budget > 4000 && ram.price < 200) score -= 1000;
+                                    if (totalPrice <= intent.budget) {
+                                        let score = 0;
+                                        if (gpu) {
+                                            score = (gpu.price * 1.5) + (cpu.price * 1.0) + (ram.price * 0.5) + (ssd.price * 0.4) + (mb.price * 0.3) + (psu.price * 0.3) + (c.price * 0.1);
+                                        } else {
+                                            score = (cpu.price * 1.2) + (ram.price * 0.6) + (ssd.price * 0.4) + (mb.price * 0.3) + (psu.price * 0.3) + (c.price * 0.1);
+                                        }
 
-                                    // PENALIDADE DE GARGALO (Evitar CPU fraca com GPU forte)
-                                    if (gpu && this.calculateBottleneck(cpu, gpu)) {
-                                        score -= 2000;
-                                    }
+                                        if (cooler) score += cooler.price * 0.2; // Cooler gera um bônus pequeno de temperatura
 
-                                    // PENALIDADE DE REDUNDÂNCIA DE VÍDEO (Evitar APU + GPU Dedicada)
-                                    if (gpu && cpu.hasIntegratedGraphics) {
-                                        // Processadores com 'G' (APUs) perdem performance para abrigar a placa de vídeo interna.
-                                        // Se estamos comprando uma placa dedicada, usar uma APU é um erro técnico.
-                                        score -= 1500;
-                                    }
+                                        if (intent.budget > 4000 && ram.price < 200) score -= 1000;
 
-                                    // BÔNUS SEMÂNTICO DE SCORE (Preferências do Usuário)
-                                    if (intent.preferences) {
-                                        const comboNames = [cpu.name, mb.name, ram.name, ssd.name, psu.name, c.name, gpu?.name || ''].join(' ').toLowerCase();
-                                        if (intent.preferences.brands) {
-                                            for (const brand of intent.preferences.brands) {
-                                                if (comboNames.includes(brand.toLowerCase())) score += 800; // Boost moderado
+                                        // PENALIDADE DE GARGALO (Evitar CPU fraca com GPU forte)
+                                        if (gpu && this.calculateBottleneck(cpu, gpu)) {
+                                            score -= 2000;
+                                        }
+
+                                        // PENALIDADE DE REDUNDÂNCIA DE VÍDEO (Evitar APU + GPU Dedicada)
+                                        if (gpu && cpu.hasIntegratedGraphics) {
+                                            // Processadores com 'G' (APUs) perdem performance para abrigar a placa de vídeo interna.
+                                            // Se estamos comprando uma placa dedicada, usar uma APU é um erro técnico.
+                                            score -= 1500;
+                                        }
+
+                                        // BÔNUS SEMÂNTICO DE SCORE (Preferências do Usuário)
+                                        if (intent.preferences) {
+                                            const comboNames = [cpu.name, mb.name, ram.name, ssd.name, psu.name, c.name, gpu?.name || '', cooler?.name || ''].join(' ').toLowerCase();
+                                            if (intent.preferences.brands) {
+                                                for (const brand of intent.preferences.brands) {
+                                                    if (comboNames.includes(brand.toLowerCase())) score += 800; // Boost moderado
+                                                }
+                                            }
+                                            if (intent.preferences.colors) {
+                                                for (const color of intent.preferences.colors) {
+                                                    if (comboNames.includes(color.toLowerCase())) score += 600; 
+                                                }
                                             }
                                         }
-                                        if (intent.preferences.colors) {
-                                            for (const color of intent.preferences.colors) {
-                                                if (comboNames.includes(color.toLowerCase())) score += 600; 
-                                            }
-                                        }
-                                    }
 
-                                    if (score > bestScore) {
-                                        bestScore = score;
-                                        bestCombo = [cpu, mb, ram, ssd, psu, c];
-                                        if (gpu) bestCombo.push(gpu);
+                                        if (score > bestScore) {
+                                            bestScore = score;
+                                            bestCombo = [cpu, mb, ram, ssd, psu, c];
+                                            if (gpu) bestCombo.push(gpu);
+                                            if (cooler) bestCombo.push(cooler);
+                                        }
                                     }
                                 }
                             }
@@ -208,6 +227,7 @@ export class HardwareEngine {
                 case 'SSD': part.reason = `Armazenamento de ultra velocidade (NVMe) para que seus jogos e sistema carreguem em segundos.`; break;
                 case 'PSU': part.reason = `Fonte de alimentação dimensionada com folga de segurança e proteção elétrica para as suas peças.`; break;
                 case 'CASE': part.reason = `Gabinete com formato físico perfeitamente validado para caber a placa-mãe.`; break;
+                case 'COOLER': part.reason = `Sistema de refrigeração termicamente dimensionado para domar o calor gerado por este processador.`; break;
                 default: part.reason = `Peça selecionada pela nossa inteligência artificial como a melhor opção matemática de custo.`;
             }
         }
