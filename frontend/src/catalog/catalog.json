@@ -229,5 +229,102 @@
     "ramType": "DDR5",
     "link": "https://www.kabum.com.br/",
     "photo": "https://images.kabum.com.br/produtos/fotos/372370/memoria-kingston-fury-beast-rgb-16gb-6000mhz-ddr5-cl40-preto-kf560c40bbak2-32_1660312061_m.jpg"
+  },
+  "cpu_7800x3d": {
+    "id": "cpu_7800x3d",
+    "component": "CPU",
+    "name": "Processador AMD Ryzen 7 7800X3D, 4.2GHz (5.0GHz Max Turbo), Cache 104MB, AM5",
+    "price": 3200,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/446210/processador-amd-ryzen-7-7800x3d-5-0ghz-max-turbo-cache-104mb-am5-sem-video-100-100000910wof_1680721731_m.jpg",
+    "socket": "AM5",
+    "hasIntegratedGraphics": true
+  },
+  "cpu_i9_14900k": {
+    "id": "cpu_i9_14900k",
+    "component": "CPU",
+    "name": "Processador Intel Core i9-14900K, 14ª Geração, 6.0GHz Max Turbo, Cache 36MB, LGA 1700",
+    "price": 4500,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/496030/processador-intel-core-i9-14900k-14-geracao-6-0ghz-max-turbo-cache-36mb-24-nucleos-32-threads-lga-1700-video-integrado-bx8071514900k_1697548232_m.jpg",
+    "socket": "LGA1700",
+    "hasIntegratedGraphics": true
+  },
+  "mb_x670e": {
+    "id": "mb_x670e",
+    "component": "MB",
+    "name": "Placa-Mãe ASUS ROG Crosshair X670E Hero, AMD AM5, ATX, DDR5",
+    "price": 4500,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/380540/placa-mae-asus-rog-crosshair-x670e-hero-amd-am5-x670-atx-ddr5-aura-sync-90mb1b00-m0eay0_1663185351_m.jpg",
+    "socket": "AM5",
+    "ramType": "DDR5",
+    "formFactor": "ATX"
+  },
+  "mb_z790": {
+    "id": "mb_z790",
+    "component": "MB",
+    "name": "Placa-Mãe MSI MEG Z790 Godlike, Intel LGA 1700, E-ATX, DDR5",
+    "price": 6500,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/401490/placa-mae-msi-meg-z790-godlike-intel-lga-1700-e-atx-ddr5-meg-z790-godlike_1669894812_m.jpg",
+    "socket": "LGA1700",
+    "ramType": "DDR5",
+    "formFactor": "E-ATX"
+  },
+  "gpu_rtx4090": {
+    "id": "gpu_rtx4090",
+    "component": "GPU",
+    "name": "Placa de Vídeo RTX 4090 ROG Strix ASUS NVIDIA GeForce, 24GB GDDR6X",
+    "price": 15500,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/388270/placa-de-video-asus-rog-strix-nvidia-geforce-rtx-4090-24-gb-gddr6x-dlss-ray-tracing-90yv0id1-m0na00_1665671158_m.jpg"
+  },
+  "gpu_rtx4080s": {
+    "id": "gpu_rtx4080s",
+    "component": "GPU",
+    "name": "Placa de Vídeo RTX 4080 SUPER ROG Strix ASUS NVIDIA, 16GB GDDR6X",
+    "price": 8500,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/515570/placa-de-video-rtx-4080-super-rog-strix-asus-nvidia-16gb-gddr6x-dlss-ray-tracing-90yv0k10-m0na00_1705668102_m.jpg"
+  },
+  "ram_64gb_ddr5": {
+    "id": "ram_64gb_ddr5",
+    "component": "RAM",
+    "name": "Memória Corsair Dominator Titanium, 64GB (2x32GB), 6000MHz, DDR5",
+    "price": 2200,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/476220/memoria-corsair-dominator-titanium-rgb-64gb-2x32gb-6000mhz-ddr5-c30-preto-cmp64gx5m2b6000c30_1699971846_m.jpg",
+    "ramType": "DDR5"
+  },
+  "ssd_4tb": {
+    "id": "ssd_4tb",
+    "component": "SSD",
+    "name": "SSD Corsair MP700 PRO, 4TB, M.2 2280 PCIe Gen5 x4 NVMe",
+    "price": 3800,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/505870/ssd-corsair-mp700-pro-4tb-m-2-2280-pcie-gen5-x4-nvme-leitura-12400-mb-s-e-gravacao-11800-mb-s-preto-cssd-f4000gbmp700pnh_1701198544_m.jpg"
+  },
+  "psu_1000w": {
+    "id": "psu_1000w",
+    "component": "PSU",
+    "name": "Fonte Corsair RM1000x Shift, 1000W, 80 Plus Gold, Modular",
+    "price": 1500,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/461230/fonte-corsair-rm1000x-shift-1000w-80-plus-gold-modular-pcie-5-0-atx-3-0-preto-cp-9020253-ww_1686745173_m.jpg"
+  },
+  "case_fulltower": {
+    "id": "case_fulltower",
+    "component": "CASE",
+    "name": "Gabinete Gamer Corsair Obsidian 1000D, Super-Tower, Vidro Temperado",
+    "price": 3500,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/96640/96640_1526322964_m.jpg",
+    "supportedFormFactors": [
+      "ATX",
+      "mATX",
+      "ITX",
+      "E-ATX"
+    ]
   }
 }
