@@ -171,7 +171,23 @@ export class HardwareEngine {
             // Se o usuário quer jogar jogo pesado e o PC gerado não tem GPU Dedicada, é Injogável!
             const minGPUPrice = gpus.length > 0 ? Math.min(...gpus.map(g => g.price)) : 1300;
             const absoluteMin = minPriceFound + minGPUPrice;
-            throw new Error(`Para rodar títulos exigentes como ${intent.targetGames.join(', ')} de forma aceitável, é obrigatório o uso de uma Placa de Vídeo Dedicada. Seu orçamento de R$ ${intent.budget} construiu um PC com Placa Integrada, que não rodará esses jogos. Considere aumentar o orçamento para pelo menos R$ ${absoluteMin.toFixed(2)}.`);
+            throw new Error(`Para rodar títulos exigentes como ${intent.targetGames.join(', ')} de forma aceitável, é obrigatório o uso de uma Placa de Vídeo Dedicada. Seu orçamento construiu um PC com Placa Integrada, que não rodará esses jogos. Considere um orçamento de R$ ${absoluteMin.toFixed(2)}.`);
+        }
+    }
+
+    // Injetar motivos (reason) de escolha para o front-end
+    for (const part of bestCombo) {
+        if (!part.reason) {
+            switch(part.component) {
+                case 'CPU': part.reason = `Processador escolhido pelo excelente custo-benefício de ${part.price} BRL para o seu orçamento.`; break;
+                case 'GPU': part.reason = `Placa de vídeo dedicada selecionada para garantir FPS estável nos seus jogos.`; break;
+                case 'MB': part.reason = `Placa-mãe (Socket ${part.socket}) 100% compatível com o processador escolhido.`; break;
+                case 'RAM': part.reason = `Memória veloz e otimizada para trabalhar sem gargalos com a sua placa-mãe.`; break;
+                case 'SSD': part.reason = `Armazenamento de ultra velocidade (NVMe) para que seus jogos e sistema carreguem em segundos.`; break;
+                case 'PSU': part.reason = `Fonte de alimentação dimensionada com folga de segurança e proteção elétrica para as suas peças.`; break;
+                case 'CASE': part.reason = `Gabinete com formato físico perfeitamente validado para caber a placa-mãe.`; break;
+                default: part.reason = `Peça selecionada pela nossa inteligência artificial como a melhor opção matemática de custo.`;
+            }
         }
     }
 
