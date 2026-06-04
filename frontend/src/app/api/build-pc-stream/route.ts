@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
     // A resposta deve ser retornada imediatamente com o ReadableStream
     const response = new NextResponse(stream.readable, {
         headers: {
-            'Content-Type': 'text/event-stream',
+            'Content-Type': 'text/event-stream; charset=utf-8',
             'Cache-Control': 'no-cache',
             'Connection': 'keep-alive',
         },
