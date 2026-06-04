@@ -16,8 +16,9 @@ export class NLPService {
     const prompt = `
       Você é um especialista em montagem de PCs. O usuário disse: "${budgetQuery}".
       Extraia o orçamento máximo em Reais (BRL) e a categoria de uso principal.
+      Se o usuário mencionar nomes de jogos específicos (ex: CS:GO, Cyberpunk, Valorant, GTA V, etc), adicione na lista "targetGames".
       Se o usuário mencionar alguma marca (ex: AMD, Intel, Nvidia, Asus, Corsair) ou cor (ex: branco, preto), inclua na chave "preferences".
-      Responda APENAS com um JSON válido no formato: {"budget": number, "category": "office" | "gaming" | "heavy_gaming" | "workstation", "preferences": {"brands": ["string"], "colors": ["string"]}}
+      Responda APENAS com um JSON válido no formato: {"budget": number, "category": "office" | "gaming" | "heavy_gaming" | "workstation", "preferences": {"brands": ["string"], "colors": ["string"]}, "targetGames": ["string"]}
     `;
 
     if (this.genAI) {
@@ -31,7 +32,8 @@ export class NLPService {
         return {
           budget: typeof parsed.budget === 'number' ? parsed.budget : 3500,
           category: ['office', 'gaming', 'heavy_gaming', 'workstation'].includes(parsed.category) ? parsed.category : 'gaming',
-          preferences: parsed.preferences
+          preferences: parsed.preferences,
+          targetGames: parsed.targetGames || []
         };
       } catch (error) {
         console.error('[NLPService] Falha na IA Generativa, caindo para Fallback local.', error);
@@ -81,6 +83,13 @@ export class NLPService {
         if (qLower.includes(c)) preferences.colors!.push(c);
     }
     
-    return { budget, category, preferences };
+    // RegEx simples para jogos comuns
+    const targetGames: string[] = [];
+    const knownGames = ['cyberpunk', 'valorant', 'cs2', 'gta', 'lol', 'fortnite', 'minecraft', 'red dead', 'warzone'];
+    for (const g of knownGames) {
+        if (qLower.includes(g)) targetGames.push(g);
+    }
+    
+    return { budget, category, preferences, targetGames };
   }
 }

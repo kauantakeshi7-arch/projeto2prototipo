@@ -22,6 +22,7 @@ export interface Intent {
     brands?: string[];
     colors?: string[];
   };
+  targetGames?: string[];
 }
 
 export class HardwareEngine {
@@ -158,6 +159,20 @@ export class HardwareEngine {
 
     if (bestCombo.length === 0) {
         throw new Error(`Orçamento de R$ ${intent.budget} é insuficiente. O PC mais barato possível custa R$ ${minPriceFound.toFixed(2)}.`);
+    }
+
+    // AVALIAÇÃO DE PLAYABILITY (JOGABILIDADE)
+    const hasGpu = bestCombo.some(p => p.component === 'GPU');
+    if (!hasGpu && intent.targetGames && intent.targetGames.length > 0) {
+        const heavyGames = ['cyberpunk', 'cyberpunk 2077', 'alan wake', 'hogwarts legacy', 'starfield', 'red dead', 'rdr2', 'flight simulator', 'the last of us', 'heavy'];
+        const isDemanding = intent.targetGames.some(g => heavyGames.some(hg => g.toLowerCase().includes(hg)));
+        
+        if (isDemanding) {
+            // Se o usuário quer jogar jogo pesado e o PC gerado não tem GPU Dedicada, é Injogável!
+            const minGPUPrice = gpus.length > 0 ? Math.min(...gpus.map(g => g.price)) : 1300;
+            const absoluteMin = minPriceFound + minGPUPrice;
+            throw new Error(`Para rodar títulos exigentes como ${intent.targetGames.join(', ')} de forma aceitável, é obrigatório o uso de uma Placa de Vídeo Dedicada. Seu orçamento de R$ ${intent.budget} construiu um PC com Placa Integrada, que não rodará esses jogos. Considere aumentar o orçamento para pelo menos R$ ${absoluteMin.toFixed(2)}.`);
+        }
     }
 
     return bestCombo;
