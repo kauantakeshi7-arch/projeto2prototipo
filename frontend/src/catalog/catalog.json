@@ -206,7 +206,7 @@
     "socket": "AM4",
     "ramType": "DDR4",
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/428245/placa-mae-gigabyte-a520m-k-v2-amd-am4-matx-ddr4-rev-1-0-_1678888062_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=MB+FOTO",
     "formFactor": "mATX"
   },
   "mb_b550m_am4": {
@@ -217,7 +217,7 @@
     "socket": "AM4",
     "ramType": "DDR4",
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/114338/placa-mae-msi-b550m-pro-vdh-wifi-amd-am4-matx_1597843477_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=MB+FOTO",
     "formFactor": "mATX"
   },
   "ram_16gb_ddr5": {
@@ -227,7 +227,7 @@
     "price": 450,
     "ramType": "DDR5",
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/383400/memoria-corsair-vengeance-16gb-5200mhz-ddr5-c40-preto-cmk16gx5m1b5200c40_1664369792_m.jpg"
+    "photo": "https://placehold.co/400x400/png?text=RAM+FOTO"
   },
   "ram_32gb_ddr5": {
     "id": "ram_32gb_ddr5",
@@ -236,7 +236,7 @@
     "price": 800,
     "ramType": "DDR5",
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/372370/memoria-kingston-fury-beast-rgb-16gb-6000mhz-ddr5-cl40-preto-kf560c40bbak2-32_1660312061_m.jpg"
+    "photo": "https://placehold.co/400x400/png?text=RAM+FOTO"
   },
   "cpu_7800x3d": {
     "id": "cpu_7800x3d",
@@ -244,7 +244,7 @@
     "name": "Processador AMD Ryzen 7 7800X3D, 4.2GHz (5.0GHz Max Turbo), Cache 104MB, AM5",
     "price": 3200,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/446210/processador-amd-ryzen-7-7800x3d-5-0ghz-max-turbo-cache-104mb-am5-sem-video-100-100000910wof_1680721731_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=CPU+FOTO",
     "socket": "AM5",
     "hasIntegratedGraphics": true,
     "includesCooler": false
@@ -255,7 +255,7 @@
     "name": "Processador Intel Core i9-14900K, 14ª Geração, 6.0GHz Max Turbo, Cache 36MB, LGA 1700",
     "price": 4500,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/496030/processador-intel-core-i9-14900k-14-geracao-6-0ghz-max-turbo-cache-36mb-24-nucleos-32-threads-lga-1700-video-integrado-bx8071514900k_1697548232_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=CPU+FOTO",
     "socket": "LGA1700",
     "hasIntegratedGraphics": true,
     "includesCooler": false
@@ -266,7 +266,7 @@
     "name": "Placa-Mãe ASUS ROG Crosshair X670E Hero, AMD AM5, ATX, DDR5",
     "price": 4500,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/380540/placa-mae-asus-rog-crosshair-x670e-hero-amd-am5-x670-atx-ddr5-aura-sync-90mb1b00-m0eay0_1663185351_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=MB+FOTO",
     "socket": "AM5",
     "ramType": "DDR5",
     "formFactor": "ATX"
@@ -277,7 +277,7 @@
     "name": "Placa-Mãe MSI MEG Z790 Godlike, Intel LGA 1700, E-ATX, DDR5",
     "price": 6500,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/401490/placa-mae-msi-meg-z790-godlike-intel-lga-1700-e-atx-ddr5-meg-z790-godlike_1669894812_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=MB+FOTO",
     "socket": "LGA1700",
     "ramType": "DDR5",
     "formFactor": "E-ATX"
@@ -288,7 +288,7 @@
     "name": "Placa de Vídeo RTX 4090 ROG Strix ASUS NVIDIA GeForce, 24GB GDDR6X",
     "price": 15500,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/388270/placa-de-video-asus-rog-strix-nvidia-geforce-rtx-4090-24-gb-gddr6x-dlss-ray-tracing-90yv0id1-m0na00_1665671158_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=GPU+FOTO",
     "length": 358
   },
   "gpu_rtx4080s": {
@@ -297,7 +297,7 @@
     "name": "Placa de Vídeo RTX 4080 SUPER ROG Strix ASUS NVIDIA, 16GB GDDR6X",
     "price": 8500,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/515570/placa-de-video-rtx-4080-super-rog-strix-asus-nvidia-16gb-gddr6x-dlss-ray-tracing-90yv0k10-m0na00_1705668102_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=GPU+FOTO",
     "length": 358
   },
   "ram_64gb_ddr5": {
@@ -306,7 +306,7 @@
     "name": "Memória Corsair Dominator Titanium, 64GB (2x32GB), 6000MHz, DDR5",
     "price": 2200,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/476220/memoria-corsair-dominator-titanium-rgb-64gb-2x32gb-6000mhz-ddr5-c30-preto-cmp64gx5m2b6000c30_1699971846_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=RAM+FOTO",
     "ramType": "DDR5"
   },
   "ssd_4tb": {
@@ -315,7 +315,7 @@
     "name": "SSD Corsair MP700 PRO, 4TB, M.2 2280 PCIe Gen5 x4 NVMe",
     "price": 3800,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/505870/ssd-corsair-mp700-pro-4tb-m-2-2280-pcie-gen5-x4-nvme-leitura-12400-mb-s-e-gravacao-11800-mb-s-preto-cssd-f4000gbmp700pnh_1701198544_m.jpg"
+    "photo": "https://placehold.co/400x400/png?text=SSD+FOTO"
   },
   "psu_1000w": {
     "id": "psu_1000w",
@@ -323,7 +323,7 @@
     "name": "Fonte Corsair RM1000x Shift, 1000W, 80 Plus Gold, Modular",
     "price": 1500,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/461230/fonte-corsair-rm1000x-shift-1000w-80-plus-gold-modular-pcie-5-0-atx-3-0-preto-cp-9020253-ww_1686745173_m.jpg"
+    "photo": "https://placehold.co/400x400/png?text=PSU+FOTO"
   },
   "case_fulltower": {
     "id": "case_fulltower",
@@ -331,7 +331,7 @@
     "name": "Gabinete Gamer Corsair Obsidian 1000D, Super-Tower, Vidro Temperado",
     "price": 3500,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/96640/96640_1526322964_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=CASE+FOTO",
     "supportedFormFactors": [
       "ATX",
       "mATX",
@@ -346,7 +346,7 @@
     "name": "Placa-Mãe Gigabyte B650M AORUS ELITE, AMD AM5, mATX, DDR5",
     "price": 1300,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/396030/placa-mae-gigabyte-b650m-aorus-elite-ax-am5-matx-ddr5-wi-fi-mb-b650m-aorus-elite-ax_1667918342_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=MB+FOTO",
     "socket": "AM5",
     "ramType": "DDR5",
     "formFactor": "mATX"
@@ -357,7 +357,7 @@
     "name": "Gabinete Gamer NZXT H5 Flow, Mid-Tower, Vidro Temperado",
     "price": 600,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/401490/gabinete-gamer-nzxt-h5-flow-mid-tower-vidro-temperado-preto-cc-h51fb-01_1669894812_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=CASE+FOTO",
     "supportedFormFactors": [
       "ATX",
       "mATX",
@@ -371,7 +371,7 @@
     "name": "Air Cooler DeepCool AG400, 120mm",
     "price": 150,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/400810/cooler-para-processador-deepcool-ag400-120mm-r-ag400-bknnmn-g-1_1672322312_m.jpg"
+    "photo": "https://placehold.co/400x400/png?text=COOLER+FOTO"
   },
   "cooler_water_240": {
     "id": "cooler_water_240",
@@ -379,7 +379,7 @@
     "name": "Water Cooler Cooler Master MasterLiquid ML240L V2, 240mm",
     "price": 450,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/112674/water-cooler-cooler-master-masterliquid-ml240l-v2-rgb-240mm-mlw-d24m-a18pc-r2_1589288258_m.jpg"
+    "photo": "https://placehold.co/400x400/png?text=COOLER+FOTO"
   },
   "cooler_water_360": {
     "id": "cooler_water_360",
@@ -387,7 +387,7 @@
     "name": "Water Cooler NZXT Kraken Elite 360, RGB, 360mm",
     "price": 1800,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/476220/cooler-para-processador-nzxt-kraken-elite-360-rgb-360mm-intel-e-amd-preto-rl-kr36e-b1_1694002621_m.jpg"
+    "photo": "https://placehold.co/400x400/png?text=COOLER+FOTO"
   },
   "case_premium_lianli": {
     "id": "case_premium_lianli",
@@ -395,7 +395,7 @@
     "name": "Gabinete Gamer Lian Li O11 Dynamic EVO, Mid-Tower, Vidro Temperado",
     "price": 950,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/314227/gabinete-gamer-lian-li-o11-dynamic-evo-mid-tower-vidro-temperado-black-o11dex_1648043694_m.jpg",
+    "photo": "https://placehold.co/400x400/png?text=CASE+FOTO",
     "supportedFormFactors": [
       "ATX",
       "mATX",
