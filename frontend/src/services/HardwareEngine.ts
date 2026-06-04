@@ -141,6 +141,9 @@ export class HardwareEngine {
                                     // 3. Economia Inteligente: Processador básico já vem com cooler grátis
                                     if (cooler && cpu.includesCooler === true && intent.budget < 5000) continue;
 
+                                    // 4. Bom Senso Extremo: O Cooler não pode custar mais que o próprio Processador
+                                    if (cooler && cooler.price > cpu.price) continue;
+
                                     // 4. MOTOR DE GEOMETRIA 3D (Colisão GPU vs Gabinete)
                                     if (gpu && gpu.length && c.maxGpuLength) {
                                         let actualClearance = c.maxGpuLength;
@@ -174,7 +177,7 @@ export class HardwareEngine {
 
                                         // PENALIDADE DE GARGALO (Evitar CPU fraca com GPU forte)
                                         if (gpu && this.calculateBottleneck(cpu, gpu)) {
-                                            score -= 2000;
+                                            score -= 4000;
                                         }
 
                                         // PENALIDADE DE REDUNDÂNCIA DE VÍDEO (Evitar APU + GPU Dedicada)

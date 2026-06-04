@@ -140,7 +140,8 @@
     "name": "Placa de Vídeo ASUS DUAL RTX 5060 TI O16G NVIDIA GeForce, 16GB GDDR7, 2602MHz, 128 bits, OpenGL4.6, DLSS 4, Ray Tracing - 90YV0MH0-M0NA00",
     "price": 2500,
     "link": "https://www.kabum.com.br/produto/730378/placa-de-video-asus-dual-rtx-5060-ti-o16g-nvidia-geforce-16gb-gddr7-2602mhz-128-bits-opengl4-6-dlss-4-ray-tracing-90yv0mh0-m0na00",
-    "photo": "https://images.kabum.com.br/produtos/fotos/730378/placa-de-video-asus-dual-rtx-5060-ti-o16g-90yv0mh0-m0na00_1744738294_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/730378/placa-de-video-asus-dual-rtx-5060-ti-o16g-90yv0mh0-m0na00_1744738294_m.jpg",
+    "length": 227
   },
   "gpu_rtx4070": {
     "id": "gpu_rtx4070",
@@ -387,5 +388,21 @@
     "price": 1800,
     "link": "https://www.kabum.com.br/",
     "photo": "https://images.kabum.com.br/produtos/fotos/476220/cooler-para-processador-nzxt-kraken-elite-360-rgb-360mm-intel-e-amd-preto-rl-kr36e-b1_1694002621_m.jpg"
+  },
+  "case_premium_lianli": {
+    "id": "case_premium_lianli",
+    "component": "CASE",
+    "name": "Gabinete Gamer Lian Li O11 Dynamic EVO, Mid-Tower, Vidro Temperado",
+    "price": 950,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/314227/gabinete-gamer-lian-li-o11-dynamic-evo-mid-tower-vidro-temperado-black-o11dex_1648043694_m.jpg",
+    "supportedFormFactors": [
+      "ATX",
+      "mATX",
+      "ITX",
+      "E-ATX"
+    ],
+    "maxGpuLength": 422,
+    "reason": "Gabinete premium aquário com espaço interno imenso para acomodar placas gigantes e Water Coolers confortavelmente."
   }
 }
