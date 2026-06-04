@@ -80,7 +80,7 @@ export default function Home() {
               else if (data.status === 'PART_FOUND') {
                 setBuildData(prev => {
                   if (!prev) return prev;
-                  const exists = prev.parts.some(p => p.link === data.part.link);
+                  const exists = prev.parts.some(p => p.id === data.part.id);
                   if (exists) return prev;
                   return { ...prev, parts: [...prev.parts, data.part] };
                 });

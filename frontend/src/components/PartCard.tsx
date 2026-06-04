@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, Lightbulb, ChevronDown, ChevronUp } from 'lucide-react';
 
 export interface PCPart {
+  id: string;
   component: string;
   name: string;
   price: number;
