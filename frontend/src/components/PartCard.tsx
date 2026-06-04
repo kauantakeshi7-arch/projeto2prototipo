@@ -14,18 +14,19 @@ export interface PCPart {
 
 interface PartCardProps {
   part: PCPart;
+  index?: number;
 }
 
-export function PartCard({ part }: PartCardProps) {
+export function PartCard({ part, index = 0 }: PartCardProps) {
   const [showReason, setShowReason] = useState(false);
 
   return (
     <motion.div 
       layout
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.4 }}
+      initial={{ opacity: 0, x: -20, scale: 0.95 }}
+      animate={{ opacity: 1, x: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.4, delay: index * 0.1, type: "spring", stiffness: 100 }}
       className="bg-[#0a0a0a] border border-[#222222] rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-[#333333] transition-colors"
     >
       <div className="flex items-center gap-4 w-full md:w-auto">

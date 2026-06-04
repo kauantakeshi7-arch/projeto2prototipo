@@ -68,9 +68,13 @@ export async function POST(req: NextRequest) {
 
             if (req.signal.aborted) return;
             const performanceMetrics = BenchmarkEngine.calculate(bestCombo);
+            
+            const cpu = bestCombo.find(p => p.component === 'CPU');
+            const gpu = bestCombo.find(p => p.component === 'GPU') || null;
+            const bottleneck = cpu ? HardwareEngine.calculateBottleneck(cpu, gpu) : null;
 
             if (req.signal.aborted) return;
-            await writeSSE({ status: 'DONE', totalPrice, performanceMetrics });
+            await writeSSE({ status: 'DONE', totalPrice, performanceMetrics, bottleneck });
         } catch (error: unknown) {
             const errorMessage = error instanceof Error ? error.message : "Erro desconhecido.";
             await writeSSE({ status: 'ERROR', message: errorMessage });

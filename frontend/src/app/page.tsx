@@ -11,6 +11,7 @@ interface BuildData {
   totalPrice: number;
   parts: PCPart[];
   performanceMetrics?: GameFPS[];
+  bottleneck?: string;
   error?: string;
 }
 
@@ -88,7 +89,8 @@ export default function Home() {
                 setBuildData(prev => prev ? { 
                   ...prev, 
                   totalPrice: data.totalPrice,
-                  performanceMetrics: data.performanceMetrics 
+                  performanceMetrics: data.performanceMetrics,
+                  bottleneck: data.bottleneck 
                 } : null);
                 setLoading(false);
               }
@@ -111,6 +113,18 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleWhatsAppShare = () => {
+    if (!buildData) return;
+    let text = `🔥 *Meu Novo PC Gamer IA*\n\n`;
+    buildData.parts.forEach(p => {
+        text += `▪️ *${p.component}*: ${p.name.split(',')[0]} (R$ ${p.price.toFixed(2)})\n`;
+    });
+    text += `\n💰 *Total*: R$ ${buildData.totalPrice.toFixed(2)}\n\n`;
+    if (buildData.bottleneck) text += `⚠️ *Gargalo detectado*: ${buildData.bottleneck}\n\n`;
+    text += `Montado com o AI PC Builder! 🚀`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
@@ -180,7 +194,25 @@ export default function Home() {
                      }
                    </span>
                  </div>
+
+                 {!loading && buildData && !buildData.error && buildData.parts.length > 0 && (
+                   <div className="mt-6 flex flex-col gap-3 print:hidden">
+                     <button onClick={handleWhatsAppShare} className="w-full bg-[#25D366] hover:bg-[#1DA851] text-black font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
+                       Compartilhar no WhatsApp
+                     </button>
+                     <button onClick={() => window.print()} className="w-full bg-transparent border border-[#333333] hover:border-emerald-500 hover:text-emerald-400 text-slate-300 font-bold py-3 px-4 rounded-xl transition-colors">
+                       Salvar como PDF
+                     </button>
+                   </div>
+                 )}
               </div>
+
+              {!loading && buildData?.bottleneck && (
+                <div className="bg-yellow-500/10 border border-yellow-500/30 p-4 rounded-2xl">
+                  <h3 className="text-yellow-500 font-bold text-sm mb-1">⚠️ Aviso de Gargalo (Bottleneck)</h3>
+                  <p className="text-yellow-400/80 text-xs">{buildData.bottleneck}</p>
+                </div>
+              )}
 
               {!loading && buildData?.performanceMetrics && (
                 <FPSPanel metrics={buildData.performanceMetrics} />
@@ -197,7 +229,7 @@ export default function Home() {
                  <div className="space-y-4">
                    <AnimatePresence mode="popLayout">
                      {buildData?.parts.map((part, idx) => (
-                       <PartCard key={idx} part={part} />
+                       <PartCard key={idx} part={part} index={idx} />
                      ))}
                    </AnimatePresence>
                    

@@ -50,6 +50,22 @@ export class HardwareEngine {
     return 500;
   }
 
+  public static calculateBottleneck(cpu: FoundPart, gpu: FoundPart | null): string | null {
+    if (!gpu) return null; 
+    
+    const cpuId = cpu.id.toLowerCase();
+    const gpuId = gpu.id.toLowerCase();
+
+    // GPUs de altíssima performance
+    if (gpuId.includes('4070') || gpuId.includes('4080') || gpuId.includes('4090') || gpuId.includes('9070')) {
+        // CPUs de entrada ou média performance
+        if (cpuId.includes('4600') || cpuId.includes('5600') || cpuId.includes('5500') || cpuId.includes('12400') || cpuId.includes('3200')) {
+            return `Atenção: O processador pode limitar ("dar gargalo") no potencial da sua placa de vídeo. Considere um upgrade futuro para um Ryzen 7 ou superior.`;
+        }
+    }
+    return null;
+  }
+
   public static buildSetup(intent: Intent): FoundPart[] {
     const catalog = this.getCatalog();
     const parts = Object.values(catalog);
