@@ -12,6 +12,8 @@ export interface FoundPart {
   reason?: string;
   hasIntegratedGraphics?: boolean;
   includesCooler?: boolean;
+  length?: number;
+  maxGpuLength?: number;
   formFactor?: string;
   supportedFormFactors?: string[];
 }
@@ -124,17 +126,28 @@ export class HardwareEngine {
                                 
                                 // 3. Anomalia de Prioridade: SSD não deve ser abusivamente mais caro que a Placa Mãe
                                 if (ssd.price > mb.price * 2) continue;
-
                                 for (const cooler of coolersToUse) {
-                                    // REGRAS DE TERMODINÂMICA (COOLER ENGINE)
+                                    // REGRAS DE TERMODINÂMICA E FÍSICA AVANÇADA (GOD TIER)
                                     // 1. Processador topo de linha VEM SEM COOLER na caixa. É OBRIGATÓRIO comprar um.
                                     if (!cooler && cpu.includesCooler === false) continue;
                                     
                                     // 2. Thermal Throttling: Processador muito quente exige Water Cooler decente
                                     if (cooler && cpu.price > 2500 && cooler.price < 300) continue;
                                     
-                                    // 3. Processador básico já vem com cooler grátis na caixa, comprar Water Cooler é rasgar dinheiro se o orçamento estiver apertado
+                                    // 3. Economia Inteligente: Processador básico já vem com cooler grátis
                                     if (cooler && cpu.includesCooler === true && intent.budget < 5000) continue;
+
+                                    // 4. MOTOR DE GEOMETRIA 3D (Colisão GPU vs Gabinete)
+                                    if (gpu && gpu.length && c.maxGpuLength) {
+                                        let actualClearance = c.maxGpuLength;
+                                        // Se compramos um Water Cooler de 360mm ou 240mm, ele geralmente vai na frente do gabinete e rouba 50mm de espaço da GPU
+                                        if (cooler && cooler.id.includes('water')) {
+                                            actualClearance -= 50;
+                                        }
+                                        if (gpu.length > actualClearance) {
+                                            continue; // A Placa de vídeo vai bater no radiador ou na lata do gabinete. Aborta.
+                                        }
+                                    }
 
                                     const coolerPrice = cooler ? cooler.price : 0;
                                     const totalPrice = cpu.price + gpuPrice + mb.price + ram.price + ssd.price + psu.price + c.price + coolerPrice;
@@ -162,9 +175,25 @@ export class HardwareEngine {
 
                                         // PENALIDADE DE REDUNDÂNCIA DE VÍDEO (Evitar APU + GPU Dedicada)
                                         if (gpu && cpu.hasIntegratedGraphics) {
-                                            // Processadores com 'G' (APUs) perdem performance para abrigar a placa de vídeo interna.
-                                            // Se estamos comprando uma placa dedicada, usar uma APU é um erro técnico.
                                             score -= 1500;
+                                        }
+
+                                        // PENALIDADE DE UPGRADE PATH (AM4 vs AM5)
+                                        // Se o usuário tem um orçamento imenso, forçar compra de AM5. Comprar AM4 com mais de R$ 8000 é matar a longevidade do PC.
+                                        if (intent.budget >= 8000 && mb.socket === 'AM4') {
+                                            score -= 1500;
+                                        }
+
+                                        // PENALIDADE DE CURVA DE EFICIÊNCIA (PSU Overkill)
+                                        // Evita que a IA compre uma fonte de 1000W para rodar um PC que exige 400W (desperdício de dinheiro).
+                                        const psuWattageMatch = psu.name.match(/\d{3,4}W/);
+                                        if (psuWattageMatch && gpu) {
+                                            const psuWatts = parseInt(psuWattageMatch[0].replace('W', ''));
+                                            const reqWatts = this.getGpuRequiredWattage(gpu);
+                                            if (psuWatts > reqWatts + 400) {
+                                                // Pune levemente se a folga da fonte for absurdamente além de 400W do recomendado da NVIDIA/AMD
+                                                score -= 300;
+                                            }
                                         }
 
                                         // BÔNUS SEMÂNTICO DE SCORE (Preferências do Usuário)

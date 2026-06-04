@@ -122,7 +122,8 @@
     "name": "Placa de Vídeo XFX Speedster QICK308 Radeon RX 7600 White AMD Edition, 8GB, GDDR6, 128-bit - RX-76PQICKWY",
     "price": 1350,
     "link": "https://www.kabum.com.br/produto/920419/placa-de-video-xfx-speedster-qick308-radeon-rx-7600-white-amd-edition-8gb-gddr6-128-bit-rx-76pqickwy",
-    "photo": "https://images.kabum.com.br/produtos/fotos/920419/placa-de-video-xfx-speedster-qick308-radeon-rx-7600-white-amd-edition-8gb-gddr6-128-bit-rx-76pqickwy_1758818491_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/920419/placa-de-video-xfx-speedster-qick308-radeon-rx-7600-white-amd-edition-8gb-gddr6-128-bit-rx-76pqickwy_1758818491_m.jpg",
+    "length": 240
   },
   "gpu_rtx4060": {
     "id": "gpu_rtx4060",
@@ -130,7 +131,8 @@
     "name": "Placa de Vídeo Gigabyte RTX 5060 WINDFORCE 8G NVIDIA GeForce, 8GB GDDR7, 128bits, DLSS, Ray Tracing - GV-N5060WF2-8GD",
     "price": 1850,
     "link": "https://www.kabum.com.br/produto/777077/placa-de-video-gigabyte-rtx-5060-windforce-8g-nvidia-geforce-8gb-gddr7-128bits-dlss-ray-tracing-gv-n5060wf2-8gd",
-    "photo": "https://images.kabum.com.br/produtos/fotos/777077/placa-de-video-gigabyte-rtx-5060-windforce-8g-nvidia-geforce-8gb-gddr7-128bits-dlss-ray-tracing-gv-n5060wf2-8gd_1747328997_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/777077/placa-de-video-gigabyte-rtx-5060-windforce-8g-nvidia-geforce-8gb-gddr7-128bits-dlss-ray-tracing-gv-n5060wf2-8gd_1747328997_m.jpg",
+    "length": 200
   },
   "gpu_rtx4060ti": {
     "id": "gpu_rtx4060ti",
@@ -146,7 +148,8 @@
     "name": "Placa de Vídeo PowerColor Red Devil AMD Radeon RX 9070 XT 16GB GDDR6 - RX9070XT 16G-E/OC",
     "price": 3800,
     "link": "https://www.kabum.com.br/produto/871949/placa-de-video-powercolor-red-devil-amd-radeon-rx-9070-xt-16gb-gddr6-rx9070xt-16g-e-oc",
-    "photo": "https://images.kabum.com.br/produtos/fotos/871949/placa-de-video-powercolor-red-devil-amd-radeon-rx-9070-xt-16gb-gddr6-rx9070xt-16g-e-oc_1773946069_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/871949/placa-de-video-powercolor-red-devil-amd-radeon-rx-9070-xt-16gb-gddr6-rx9070xt-16g-e-oc_1773946069_m.jpg",
+    "length": 260
   },
   "psu_500w": {
     "id": "psu_500w",
@@ -191,7 +194,8 @@
       "ATX",
       "mATX",
       "ITX"
-    ]
+    ],
+    "maxGpuLength": 300
   },
   "mb_a520m_am4": {
     "id": "mb_a520m_am4",
@@ -283,7 +287,8 @@
     "name": "Placa de Vídeo RTX 4090 ROG Strix ASUS NVIDIA GeForce, 24GB GDDR6X",
     "price": 15500,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/388270/placa-de-video-asus-rog-strix-nvidia-geforce-rtx-4090-24-gb-gddr6x-dlss-ray-tracing-90yv0id1-m0na00_1665671158_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/388270/placa-de-video-asus-rog-strix-nvidia-geforce-rtx-4090-24-gb-gddr6x-dlss-ray-tracing-90yv0id1-m0na00_1665671158_m.jpg",
+    "length": 358
   },
   "gpu_rtx4080s": {
     "id": "gpu_rtx4080s",
@@ -291,7 +296,8 @@
     "name": "Placa de Vídeo RTX 4080 SUPER ROG Strix ASUS NVIDIA, 16GB GDDR6X",
     "price": 8500,
     "link": "https://www.kabum.com.br/",
-    "photo": "https://images.kabum.com.br/produtos/fotos/515570/placa-de-video-rtx-4080-super-rog-strix-asus-nvidia-16gb-gddr6x-dlss-ray-tracing-90yv0k10-m0na00_1705668102_m.jpg"
+    "photo": "https://images.kabum.com.br/produtos/fotos/515570/placa-de-video-rtx-4080-super-rog-strix-asus-nvidia-16gb-gddr6x-dlss-ray-tracing-90yv0k10-m0na00_1705668102_m.jpg",
+    "length": 358
   },
   "ram_64gb_ddr5": {
     "id": "ram_64gb_ddr5",
@@ -330,7 +336,8 @@
       "mATX",
       "ITX",
       "E-ATX"
-    ]
+    ],
+    "maxGpuLength": 400
   },
   "mb_b650m": {
     "id": "mb_b650m",
@@ -354,7 +361,8 @@
       "ATX",
       "mATX",
       "ITX"
-    ]
+    ],
+    "maxGpuLength": 365
   },
   "cooler_air": {
     "id": "cooler_air",
