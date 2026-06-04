@@ -326,5 +326,29 @@
       "ITX",
       "E-ATX"
     ]
+  },
+  "mb_b650m": {
+    "id": "mb_b650m",
+    "component": "MB",
+    "name": "Placa-Mãe Gigabyte B650M AORUS ELITE, AMD AM5, mATX, DDR5",
+    "price": 1300,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/396030/placa-mae-gigabyte-b650m-aorus-elite-ax-am5-matx-ddr5-wi-fi-mb-b650m-aorus-elite-ax_1667918342_m.jpg",
+    "socket": "AM5",
+    "ramType": "DDR5",
+    "formFactor": "mATX"
+  },
+  "case_mid_premium": {
+    "id": "case_mid_premium",
+    "component": "CASE",
+    "name": "Gabinete Gamer NZXT H5 Flow, Mid-Tower, Vidro Temperado",
+    "price": 600,
+    "link": "https://www.kabum.com.br/",
+    "photo": "https://images.kabum.com.br/produtos/fotos/401490/gabinete-gamer-nzxt-h5-flow-mid-tower-vidro-temperado-preto-cc-h51fb-01_1669894812_m.jpg",
+    "supportedFormFactors": [
+      "ATX",
+      "mATX",
+      "ITX"
+    ]
   }
 }

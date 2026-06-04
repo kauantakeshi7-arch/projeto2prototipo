@@ -112,6 +112,16 @@ export class HardwareEngine {
                                 // CRÍTICO: Trava de dimensão física da Placa-Mãe vs Gabinete
                                 if (mb.formFactor && c.supportedFormFactors && !c.supportedFormFactors.includes(mb.formFactor)) continue;
 
+                                // REGRAS DE HARMONIA DE SETUP (TIER MATCHING)
+                                // 1. CPU topo de linha exige Placa-Mãe robusta (VRMs não podem ferver)
+                                if (cpu.price > 1500 && mb.price < 800) continue;
+                                
+                                // 2. GPU gigante/quente exige Gabinete premium (Airflow/Espaço)
+                                if (gpu && gpu.price > 4000 && c.price < 300) continue;
+                                
+                                // 3. Anomalia de Prioridade: SSD não deve ser abusivamente mais caro que a Placa Mãe
+                                if (ssd.price > mb.price * 2) continue;
+
                                 const totalPrice = cpu.price + gpuPrice + mb.price + ram.price + ssd.price + psu.price + c.price;
 
                                 if (totalPrice < minPriceFound) {
@@ -127,6 +137,18 @@ export class HardwareEngine {
                                     }
 
                                     if (intent.budget > 4000 && ram.price < 200) score -= 1000;
+
+                                    // PENALIDADE DE GARGALO (Evitar CPU fraca com GPU forte)
+                                    if (gpu && this.calculateBottleneck(cpu, gpu)) {
+                                        score -= 2000;
+                                    }
+
+                                    // PENALIDADE DE REDUNDÂNCIA DE VÍDEO (Evitar APU + GPU Dedicada)
+                                    if (gpu && cpu.hasIntegratedGraphics) {
+                                        // Processadores com 'G' (APUs) perdem performance para abrigar a placa de vídeo interna.
+                                        // Se estamos comprando uma placa dedicada, usar uma APU é um erro técnico.
+                                        score -= 1500;
+                                    }
 
                                     // BÔNUS SEMÂNTICO DE SCORE (Preferências do Usuário)
                                     if (intent.preferences) {
